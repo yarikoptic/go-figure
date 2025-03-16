@@ -1,0 +1,28 @@
+#
+#  Cluster report 
+#[ Dataset prefix      = ttest++_result_010 ]
+#[ Threshold vol       = [1] 'equalRange.g_Zscr' ]
+#[ Supplement dat vol  = [0] 'equalRange.g_mean' ]
+#[ Option summary      = bisided,-3.290527,3.290527,clust_nvox,32,NN2 ]
+#[ Threshold value(s)  = left-tail thr=-3.290527;  right-tail thr=3.290527 ]
+#[ Aux. stat. info.    =  ]
+#[ Nvoxel threshold    = 32;  Volume threshold = 256.000 ]
+#[ Single voxel volume = 8.000 (microliters) ]
+#[ Neighbor type, NN   = 2 ]
+#[ Voxel datum type    = float ]
+#[ Voxel dimensions    = 2.000 mm X 2.000 mm X 2.000 mm ]
+#[ Coordinates Order   = RAI ]
+#[ Mean and SEM based on signed voxel intensities ]
+#
+#Volume  CM RL  CM AP  CM IS  minRL  maxRL  minAP  maxAP  minIS  maxIS    Mean     SEM    Max Int  MI RL  MI AP  MI IS
+#------  -----  -----  -----  -----  -----  -----  -----  -----  -----  -------  -------  -------  -----  -----  -----
+     97   38.7   26.0   65.0   27.0   45.0   19.0   31.0   53.0   73.0  -0.0056  1.4e-04  -0.0085   35.0   25.0   71.0 
+     82  -40.3   71.3   37.3  -47.0  -29.0   63.0   79.0   31.0   45.0   0.0037  7.9e-05   0.0055  -43.0   71.0   37.0 
+     43  -34.4   49.2   43.1  -39.0  -31.0   41.0   53.0   39.0   49.0   0.0034  8.3e-05   0.0045  -33.0   51.0   43.0 
+     38   49.7   17.0   53.1   41.0   57.0   15.0   21.0   45.0   57.0   0.0051  1.9e-04   0.0076   53.0   15.0   57.0 
+     38   27.6   10.7   69.1   23.0   31.0    7.0   13.0   63.0   75.0  -0.0034  1.1e-04   -0.005   29.0   13.0   73.0 
+     37    5.2  -37.2   30.2    1.0   11.0  -41.0  -35.0   27.0   33.0   0.0041  1.1e-04   0.0053    1.0  -37.0   29.0 
+     36   13.6  101.3   -7.9    9.0   21.0   97.0  105.0  -13.0   -3.0   0.0035  1.0e-04   0.0048   11.0   99.0   -5.0 
+     32   58.6   34.1   20.9   53.0   69.0   31.0   37.0   17.0   27.0  -0.0039  9.5e-05  -0.0049   69.0   35.0   25.0 
+#------  -----  -----  -----  -----  -----  -----  -----  -----  -----  -------  -------  -------  -----  -----  -----
+#   403   15.5   34.3   45.6                                            3.1e-04  2.2e-04                             

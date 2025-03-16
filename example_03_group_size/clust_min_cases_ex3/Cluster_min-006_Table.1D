@@ -1,0 +1,29 @@
+#
+#  Cluster report 
+#[ Dataset prefix      = ttest++_result_006 ]
+#[ Threshold vol       = [1] 'equalRange.g_Zscr' ]
+#[ Supplement dat vol  = [0] 'equalRange.g_mean' ]
+#[ Option summary      = -bisided,p=0.001,clust_nvox,33,NN2 ]
+#[ Threshold value(s)  = left-tail p=0.001000 -> thr=-3.290527;  right-tail p=0.001000 -> thr=3.290527 ]
+#[ Aux. stat. info.    =  ]
+#[ Nvoxel threshold    = 33;  Volume threshold = 264.000 ]
+#[ Single voxel volume = 8.000 (microliters) ]
+#[ Neighbor type, NN   = 2 ]
+#[ Voxel datum type    = float ]
+#[ Voxel dimensions    = 2.000 mm X 2.000 mm X 2.000 mm ]
+#[ Coordinates Order   = RAI ]
+#[ Mask                = extra_datasets/group_mask.inter.nii.gz ]
+#[ Mean and SEM based on signed voxel intensities ]
+#
+#Volume  CM RL  CM AP  CM IS  minRL  maxRL  minAP  maxAP  minIS  maxIS    Mean     SEM    Max Int  MI RL  MI AP  MI IS
+#------  -----  -----  -----  -----  -----  -----  -----  -----  -----  -------  -------  -------  -----  -----  -----
+    134   37.8   25.8   65.1   25.0   45.0   17.0   31.0   53.0   73.0  -0.0055  1.3e-04  -0.0085   35.0   25.0   71.0 
+    122  -38.9   71.3   38.7  -47.0  -29.0   63.0   79.0   31.0   49.0   0.0036  7.1e-05   0.0057  -39.0   79.0   41.0 
+     52  -34.4   48.8   43.5  -39.0  -29.0   41.0   53.0   39.0   49.0   0.0032  7.3e-05   0.0043  -31.0   51.0   43.0 
+     50    5.1  -36.5   31.5   -1.0   11.0  -41.0  -29.0   27.0   37.0   0.0042  9.0e-05   0.0053    1.0  -37.0   29.0 
+     49   -3.6  -33.0   42.8   -9.0    1.0  -37.0  -29.0   39.0   47.0   0.0047  1.9e-04   0.0072   -3.0  -33.0   43.0 
+     36   51.5   16.5   54.1   45.0   57.0   13.0   19.0   49.0   59.0   0.0053  1.9e-04   0.0077   53.0   15.0   57.0 
+     35   55.8   34.5   19.4   49.0   61.0   29.0   37.0   17.0   23.0  -0.0042  8.5e-05   -0.005   59.0   35.0   19.0 
+     34   13.3  101.1   -7.6    9.0   19.0   97.0  105.0  -11.0   -3.0   0.0033  1.0e-04   0.0046   11.0   99.0   -5.0 
+#------  -----  -----  -----  -----  -----  -----  -----  -----  -----  -------  -------  -------  -----  -----  -----
+#   512   11.1   27.9   45.2                                            9.1e-04  2.0e-04                             

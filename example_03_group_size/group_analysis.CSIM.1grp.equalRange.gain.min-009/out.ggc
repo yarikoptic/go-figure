@@ -1,0 +1,15 @@
+-- make 3dttest++ command with 1 set(s) of dsets of length(s): 108
+** remove_ids: cannot remove missing ID 'sub-067'
+** remove_ids: cannot remove missing ID 'sub-110'
+** remove_ids: cannot remove missing ID 'sub-116'
+** remove_ids: cannot remove missing ID 'sub-119'
+** remove_ids: missing 4 of 9 IDs
+   IDs look like: sub-002 sub-004 sub-006
+   missing IDs look like: sub-119
+-- remove_ids: allowing 4 missing IDs...
+subject counts:
+  label            init nsubj       after restrict   after omit      
+  equalRange.gain  108              45               40              
+
+++ setting common dir, data_dir = /data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b
+++ command written to file run.tt.equalRange.gain.tcsh

@@ -1,0 +1,583 @@
+
+type = string-attribute
+name = HISTORY_NOTE
+count = 3874
+'[taylorpa3@cn4387: Mon Dec  2 17:24:36 2024] {AFNI_24.3.06:linux_rocky_8} 3dttest++ -prefix ttest++_result_030 -setA equalRange.gain sub-002 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-002/sub-002.results/stats.sub-002_REML+tlrc.HEAD[Resp#1_Coef]' sub-004 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-004/sub-004.results/stats.sub-004_REML+tlrc.HEAD[Resp#1_Coef]' sub-006 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-006/sub-006.results/stats.sub-006_REML+tlrc.HEAD[Resp#1_Coef]' sub-008 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-008/sub-008.results/stats.sub-008_REML+tlrc.HEAD[Resp#1_Coef]' sub-010 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-010/sub-010.results/stats.sub-010_REML+tlrc.HEAD[Resp#1_Coef]' sub-014 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-014/sub-014.results/stats.sub-014_REML+tlrc.HEAD[Resp#1_Coef]' sub-018 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-018/sub-018.results/stats.sub-018_REML+tlrc.HEAD[Resp#1_Coef]' sub-020 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-020/sub-020.results/stats.sub-020_REML+tlrc.HEAD[Resp#1_Coef]' sub-022 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-022/sub-022.results/stats.sub-022_REML+tlrc.HEAD[Resp#1_Coef]' sub-024 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-024/sub-024.results/stats.sub-024_REML+tlrc.HEAD[Resp#1_Coef]' sub-026 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-026/sub-026.results/stats.sub-026_REML+tlrc.HEAD[Resp#1_Coef]' sub-036 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-036/sub-036.results/stats.sub-036_REML+tlrc.HEAD[Resp#1_Coef]' sub-038 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-038/sub-038.results/stats.sub-038_REML+tlrc.HEAD[Resp#1_Coef]' sub-040 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-040/sub-040.results/stats.sub-040_REML+tlrc.HEAD[Resp#1_Coef]' sub-044 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-044/sub-044.results/stats.sub-044_REML+tlrc.HEAD[Resp#1_Coef]' sub-046 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-046/sub-046.results/stats.sub-046_REML+tlrc.HEAD[Resp#1_Coef]' sub-050 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-050/sub-050.results/stats.sub-050_REML+tlrc.HEAD[Resp#1_Coef]' sub-052 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-052/sub-052.results/stats.sub-052_REML+tlrc.HEAD[Resp#1_Coef]' sub-054 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-054/sub-054.results/stats.sub-054_REML+tlrc.HEAD[Resp#1_Coef]' sub-056 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-056/sub-056.results/stats.sub-056_REML+tlrc.HEAD[Resp#1_Coef]' sub-058 '/data/SSCC_NARPS/globus_sync/ademo_narps/data_23_ap_task_b/sub-058/sub-058.results/stats.sub-058_REML+tlrc.HEAD[Resp#1_Coef]' -mask group_mask.inter.nii.gz -Clustsim -seed 5\n[taylorpa3@cn4387: Mon Dec  2 17:34:39 2024] {AFNI_24.3.06:linux_rocky_8} 3drefit -atrstring AFNI_CLUSTSIM_NN1_1sided file:ttest++_result_030.CSimA.NN1_1sided.niml -atrstring AFNI_CLUSTSIM_NN2_1sided file:ttest++_result_030.CSimA.NN2_1sided.niml -atrstring AFNI_CLUSTSIM_NN3_1sided file:ttest++_result_030.CSimA.NN3_1sided.niml -atrstring AFNI_CLUSTSIM_NN1_2sided file:ttest++_result_030.CSimA.NN1_2sided.niml -atrstring AFNI_CLUSTSIM_NN2_2sided file:ttest++_result_030.CSimA.NN2_2sided.niml -atrstring AFNI_CLUSTSIM_NN3_2sided file:ttest++_result_030.CSimA.NN3_2sided.niml -atrstring AFNI_CLUSTSIM_NN1_bisided file:ttest++_result_030.CSimA.NN1_bisided.niml -atrstring AFNI_CLUSTSIM_NN2_bisided file:ttest++_result_030.CSimA.NN2_bisided.niml -atrstring AFNI_CLUSTSIM_NN3_bisided file:ttest++_result_030.CSimA.NN3_bisided.niml ./ttest++_result_030+tlrc.HEAD~
+
+type = string-attribute
+name = TYPESTRING
+count = 15
+'3DIM_HEAD_FUNC~
+
+type = string-attribute
+name = IDCODE_STRING
+count = 27
+'AFN_RvvhvsQi5Pk1wnZsQ7QoJQ~
+
+type = string-attribute
+name = IDCODE_DATE
+count = 25
+'Mon Dec  2 17:24:36 2024~
+
+type = integer-attribute
+name = SCENE_DATA
+count = 8
+ 2 11 1 -999 -999
+ -999 -999 -999
+
+type = string-attribute
+name = LABEL_1
+count = 5
+'zyxt~
+
+type = string-attribute
+name = LABEL_2
+count = 5
+'zyxt~
+
+type = string-attribute
+name = DATASET_NAME
+count = 5
+'zyxt~
+
+type = integer-attribute
+name = ORIENT_SPECIFIC
+count = 3
+ 1 2 4
+
+type  = float-attribute
+name  = ORIGIN
+count = 3
+             95            131            -77
+
+type  = float-attribute
+name  = DELTA
+count = 3
+             -2             -2              2
+
+type  = float-attribute
+name  = IJK_TO_DICOM
+count = 12
+             -2              0              0             95              0
+             -2              0            131              0              0
+              2            -77
+
+type  = float-attribute
+name  = IJK_TO_DICOM_REAL
+count = 12
+             -2              0              0             95              0
+             -2              0            131              0              0
+              2            -77
+
+type  = float-attribute
+name  = BRICK_STATS
+count = 4
+    -0.01625665     0.01202239      -4.180855       4.241652
+
+type = integer-attribute
+name = DATASET_RANK
+count = 8
+ 3 2 0 0 0
+ 0 0 0
+
+type = integer-attribute
+name = DATASET_DIMENSIONS
+count = 5
+ 96 114 96 0 0
+
+type = integer-attribute
+name = BRICK_TYPES
+count = 2
+ 3 3
+
+type  = float-attribute
+name  = BRICK_FLOAT_FACS
+count = 2
+              0              0
+
+type = string-attribute
+name = BRICK_LABS
+count = 36
+'equalRange.g_mean~equalRange.g_Zscr~
+
+type  = float-attribute
+name  = BRICK_STATAUX
+count = 3
+              1              5              0
+
+type = string-attribute
+name = BRICK_STATSYM
+count = 14
+'none;Zscore()~
+
+type  = float-attribute
+name  = FDRCURVE_000001
+count = 103
+   0.0001375297     0.03551805   0.0001375289    0.004279566    0.008400415
+     0.01245188     0.01691129     0.02201118     0.02606725     0.03076948
+     0.03593079     0.04192249      0.0474995     0.05290923     0.05918847
+     0.06508347     0.07219508     0.07850881     0.08529021     0.09241728
+     0.09853376      0.1060497       0.114387      0.1214682      0.1288187
+      0.1376213      0.1457024      0.1546021       0.164273      0.1733693
+      0.1804482      0.1888582       0.197804      0.2063811      0.2159821
+      0.2267846      0.2361528      0.2457329      0.2541602       0.262971
+       0.272081      0.2816271      0.2900113      0.3019064      0.3114887
+      0.3230183       0.334155      0.3427878      0.3538297      0.3646586
+      0.3759528       0.385226      0.3952371      0.4067794      0.4153094
+      0.4244828      0.4331117      0.4464178      0.4575388      0.4687828
+      0.4778578      0.4861657      0.4946501      0.4989624      0.5072462
+      0.5158122       0.521805      0.5328421      0.5388359       0.546147
+      0.5517194      0.5618603      0.5688198      0.5734921      0.5804353
+      0.5848284      0.5876224      0.5947982      0.6019838      0.6059681
+      0.6131378      0.6166899      0.6352192      0.6393391      0.6397803
+      0.6402215      0.6404898      0.6466051      0.6495057      0.6511026
+      0.6560131      0.6656406      0.6668401      0.6670584      0.6670584
+      0.6851006      0.6856242      0.6857004      0.6917462      0.7006396
+      0.7012366      0.7012366      0.7012366
+
+type = string-attribute
+name = TEMPLATE_SPACE
+count = 4
+'MNI~
+
+type = integer-attribute
+name = INT_CMAP
+count = 1
+ 0
+
+type = string-attribute
+name = BYTEORDER_STRING
+count = 10
+'LSB_FIRST~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN1_1sided
+count = 2261
+'<3dClustSim_NN1
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="1-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 14260 15614 17325 19071 21064 23782 26562 29533 33783 39456
+ 9567 10490 11798 13118 14878 16781 19830 23362 28040 34411
+ 6596 7188 7834 8809 10059 11374 13395 16670 20816 28040
+ 4320 4686 5357 6001 6708 7776 9095 10990 14614 21318
+ 2902 3166 3484 3904 4386 4984 5813 7138 9376 13794
+ 1849 1996 2180 2479 2802 3118 3614 4423 5814 8409
+ 1155 1244 1356 1496 1677 1891 2198 2628 3363 5087
+ 703 750 803 867 955 1075 1213 1451 1816 2589
+ 387 415 445 478 521 569 638 748 884 1256
+ 269 285 303 325 352 386 427 490 588 748
+ 168 176 188 199 215 231 256 295 343 443
+ 115 121 129 137 148 161 178 200 236 307
+ 83 88 94 100 107 116 128 144 167 219
+ 53 56 59 64 68 73 81 90 106 135
+ 38 40 43 46 49 53 58 64 74 95
+ 31 32 34 37 39 42 46 52 59 75
+ 23 24 26 27 29 31 34 39 44 54
+ 18 19 20 21 23 25 27 30 35 43
+ 15 16 17 17 18 20 22 24 28 34
+ 11 12 12 13 14 15 16 17 20 24
+ 9 10 10 10 11 12 13 14 16 19
+ 8 8 9 9 9 10 11 12 14 17
+ 6 7 7 7 8 8 9 10 11 13
+ 6 6 6 6 7 7 7 8 9 11
+ 5 5 5 5 6 6 6 7 8 10
+ 4 4 4 4 4 5 5 6 6 8
+ 3 3 3 4 4 4 4 5 5 6
+ 3 3 3 3 3 4 4 4 5 6
+ 3 3 3 3 3 3 3 4 4 5
+</3dClustSim_NN1>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN2_1sided
+count = 2284
+'<3dClustSim_NN2
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="1-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 23743 24811 25940 27546 29110 30732 32521 34965 37946 42620
+ 17742 19014 20741 22149 24033 25868 27807 30043 33636 38198
+ 11901 12956 14333 15971 17843 19899 22222 24871 28741 33634
+ 7373 8230 8994 10011 11554 13076 15730 18714 22121 28073
+ 4594 5093 5618 6225 7176 8110 9677 11838 15569 21235
+ 2788 3052 3378 3770 4244 4892 5854 7082 9386 13525
+ 1661 1789 1957 2221 2466 2834 3276 4050 5392 7630
+ 924 986 1088 1212 1341 1494 1724 2059 2694 3913
+ 484 511 548 593 636 702 804 925 1201 1689
+ 322 342 366 390 429 473 525 605 737 1019
+ 194 204 219 232 251 276 310 351 410 560
+ 131 138 146 158 169 185 204 230 270 364
+ 93 98 104 112 120 132 144 162 192 254
+ 58 62 65 70 75 82 90 101 120 152
+ 41 44 47 50 53 58 63 71 83 104
+ 33 36 37 40 43 47 51 56 64 81
+ 25 26 28 29 31 34 37 41 47 59
+ 20 20 22 23 24 26 29 33 37 46
+ 16 17 17 18 19 21 23 26 29 37
+ 12 12 13 13 14 15 17 18 21 26
+ 10 10 10 11 11 12 13 14 16 21
+ 8 9 9 9 10 11 11 12 14 17
+ 7 7 7 8 8 8 9 10 11 14
+ 6 6 6 6 7 7 8 9 10 12
+ 5 5 5 6 6 6 7 7 8 10
+ 4 4 4 4 5 5 5 6 6 8
+ 3 3 4 4 4 4 4 5 5 7
+ 3 3 3 3 4 4 4 4 5 6
+ 3 3 3 3 3 3 3 4 4 5
+</3dClustSim_NN2>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN3_1sided
+count = 2291
+'<3dClustSim_NN3
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="1-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 25785 26754 27841 29260 30557 32041 33789 35910 38972 43271
+ 20811 22024 23178 24497 26227 27846 29545 31721 34667 39043
+ 14783 15901 17520 19088 20689 22626 24720 26883 30134 34673
+ 9188 9922 11141 12559 14203 16199 18735 21145 24771 29729
+ 5553 6013 6646 7554 8414 9772 11476 13809 17579 23763
+ 3280 3628 3999 4426 4984 5747 6743 8459 11098 16201
+ 1878 2040 2309 2550 2861 3262 3812 4657 6195 8966
+ 1022 1121 1242 1358 1520 1697 1945 2377 3118 4440
+ 519 557 597 643 706 776 891 1079 1386 1930
+ 344 366 393 426 464 511 573 670 820 1154
+ 204 216 230 246 268 294 329 371 447 612
+ 136 145 155 165 177 193 214 243 286 389
+ 97 102 108 117 127 138 151 170 203 265
+ 60 63 67 72 77 84 92 105 124 159
+ 43 45 48 51 55 59 66 73 86 107
+ 34 36 38 40 44 48 52 58 66 84
+ 25 27 28 30 32 35 39 43 48 61
+ 20 21 22 23 25 27 29 33 38 47
+ 16 17 17 18 19 21 23 26 30 37
+ 12 12 13 14 14 15 17 18 21 26
+ 10 10 10 11 12 12 13 15 16 21
+ 8 9 9 9 10 11 11 13 14 18
+ 7 7 7 8 8 8 9 10 12 14
+ 6 6 6 6 7 7 8 9 10 12
+ 5 5 5 6 6 6 7 7 8 10
+ 4 4 4 4 5 5 5 6 6 8
+ 3 3 4 4 4 4 4 5 5 7
+ 3 3 3 3 4 4 4 4 5 6
+ 3 3 3 3 3 3 3 4 4 5
+</3dClustSim_NN3>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN1_2sided
+count = 2201
+'<3dClustSim_NN1
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="2-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 3125 3339 3664 3973 4421 4939 5661 6745 8113 10894
+ 2459 2622 2813 3082 3409 3866 4452 5175 6465 8542
+ 1892 2012 2172 2356 2585 2879 3237 3912 4941 6563
+ 1450 1553 1643 1774 1939 2163 2458 2800 3633 4766
+ 1078 1146 1223 1333 1441 1610 1807 2108 2463 3613
+ 799 842 900 969 1059 1173 1292 1506 1809 2528
+ 565 597 639 688 749 816 893 1028 1237 1640
+ 385 403 428 453 493 538 590 665 767 1025
+ 234 248 259 278 300 322 354 394 459 600
+ 173 182 190 203 217 234 257 288 333 420
+ 117 123 129 137 146 158 170 192 222 273
+ 85 90 94 99 106 114 124 137 158 196
+ 64 67 70 74 78 85 92 103 117 145
+ 42 44 47 49 52 55 60 66 76 95
+ 32 33 35 36 39 42 45 49 56 69
+ 26 27 29 30 31 33 36 40 45 57
+ 20 21 22 23 24 26 28 30 34 43
+ 16 16 17 18 19 20 22 24 27 34
+ 13 14 14 15 16 16 18 20 23 28
+ 10 10 11 11 12 13 13 15 17 21
+ 8 8 9 9 10 10 11 12 13 17
+ 7 7 8 8 8 9 10 10 12 14
+ 6 6 6 7 7 7 8 9 10 12
+ 5 5 5 6 6 6 7 7 8 10
+ 4 5 5 5 5 5 6 6 7 8
+ 4 4 4 4 4 4 5 5 6 7
+ 3 3 3 3 4 4 4 4 5 6
+ 3 3 3 3 3 3 4 4 4 5
+ 2 3 3 3 3 3 3 3 4 4
+</3dClustSim_NN1>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN2_2sided
+count = 2218
+'<3dClustSim_NN2
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="2-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 5146 5611 6071 6556 7185 8171 9425 11123 13773 18228
+ 3850 4200 4542 5001 5438 6136 7040 8446 9998 13644
+ 2877 3082 3326 3660 4004 4508 5304 6155 7596 10086
+ 2119 2245 2439 2646 2906 3280 3782 4500 5424 7408
+ 1505 1604 1738 1864 2054 2274 2604 3005 3742 5277
+ 1059 1132 1228 1320 1434 1594 1794 2100 2597 3531
+ 724 772 828 880 953 1072 1193 1369 1632 2378
+ 475 499 530 567 610 672 742 859 1027 1375
+ 279 294 312 332 357 388 423 479 561 734
+ 203 213 224 239 254 274 302 345 394 515
+ 133 139 146 154 164 178 196 222 255 322
+ 95 100 105 111 118 128 139 155 182 226
+ 70 74 77 81 87 94 103 115 132 161
+ 46 48 51 54 57 61 66 74 85 106
+ 34 35 37 39 42 45 48 53 61 77
+ 28 29 30 32 34 36 39 43 49 62
+ 21 22 23 24 26 27 29 33 37 46
+ 17 17 18 19 20 22 23 25 29 37
+ 14 14 15 16 16 17 19 21 24 30
+ 10 11 11 12 12 13 14 16 18 22
+ 8 9 9 10 10 11 12 13 14 17
+ 7 8 8 8 9 9 10 11 12 15
+ 6 6 7 7 7 8 8 9 10 12
+ 5 5 6 6 6 6 7 8 8 10
+ 5 5 5 5 5 6 6 6 7 9
+ 4 4 4 4 4 5 5 5 6 7
+ 3 3 3 4 4 4 4 4 5 6
+ 3 3 3 3 3 3 4 4 4 5
+ 3 3 3 3 3 3 3 3 4 4
+</3dClustSim_NN2>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN3_2sided
+count = 2223
+'<3dClustSim_NN3
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="2-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 7010 7566 8198 9011 9965 11069 13132 15216 17829 22875
+ 4956 5323 5714 6278 6911 7895 8877 10649 13181 17500
+ 3514 3762 4093 4483 4976 5621 6502 7586 9275 12747
+ 2465 2651 2857 3173 3542 3914 4540 5417 6497 8842
+ 1722 1848 1984 2158 2386 2679 3013 3577 4361 5914
+ 1178 1249 1347 1464 1591 1770 2050 2341 2966 4084
+ 797 849 903 982 1082 1202 1341 1564 1855 2715
+ 510 539 583 625 680 739 836 949 1143 1511
+ 295 314 332 351 380 414 459 520 618 795
+ 212 221 238 252 269 290 319 367 429 548
+ 138 144 153 162 172 190 206 231 268 337
+ 98 103 108 115 123 133 144 163 193 238
+ 72 75 79 84 89 97 105 118 138 172
+ 47 50 52 55 58 63 68 76 87 113
+ 35 36 38 41 43 46 49 55 62 80
+ 28 30 31 33 35 37 40 44 50 64
+ 21 22 23 25 26 28 30 33 38 48
+ 17 18 18 19 21 22 24 26 30 38
+ 14 14 15 16 17 18 19 21 24 30
+ 11 11 11 12 12 13 14 16 18 22
+ 8 9 9 10 10 11 12 13 14 18
+ 7 8 8 8 9 9 10 11 12 15
+ 6 6 7 7 7 8 8 9 10 12
+ 5 5 6 6 6 6 7 8 8 10
+ 5 5 5 5 5 6 6 7 7 9
+ 4 4 4 4 4 5 5 5 6 7
+ 3 3 3 4 4 4 4 4 5 6
+ 3 3 3 3 3 3 4 4 4 5
+ 3 3 3 3 3 3 3 3 4 4
+</3dClustSim_NN3>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN1_bisided
+count = 2202
+'<3dClustSim_NN1
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="bi-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 3125 3339 3664 3973 4421 4928 5660 6740 8111 10887
+ 2459 2622 2812 3082 3409 3860 4432 5175 6465 8528
+ 1891 2005 2172 2356 2583 2879 3237 3912 4941 6563
+ 1450 1553 1643 1774 1939 2163 2458 2797 3633 4766
+ 1077 1146 1221 1333 1441 1610 1807 2108 2463 3613
+ 799 842 900 969 1059 1173 1292 1506 1809 2528
+ 565 597 639 688 749 816 893 1028 1237 1640
+ 385 403 428 453 493 538 590 665 767 1025
+ 234 248 259 278 300 322 354 394 459 600
+ 173 182 190 203 217 234 257 288 333 420
+ 117 123 129 137 146 158 170 192 222 273
+ 85 90 94 99 106 114 124 137 158 196
+ 64 67 70 74 78 85 92 103 117 145
+ 42 44 47 49 52 55 60 66 76 95
+ 32 33 35 36 39 42 45 49 56 69
+ 26 27 29 30 31 33 36 40 45 57
+ 20 21 22 23 24 26 28 30 34 43
+ 16 16 17 18 19 20 22 24 27 34
+ 13 14 14 15 16 16 18 20 23 28
+ 10 10 11 11 12 13 13 15 17 21
+ 8 8 9 9 10 10 11 12 13 17
+ 7 7 8 8 8 9 10 10 12 14
+ 6 6 6 7 7 7 8 9 10 12
+ 5 5 5 6 6 6 7 7 8 10
+ 4 5 5 5 5 5 6 6 7 8
+ 4 4 4 4 4 4 5 5 6 7
+ 3 3 3 3 4 4 4 4 5 6
+ 3 3 3 3 3 3 4 4 4 5
+ 2 3 3 3 3 3 3 3 4 4
+</3dClustSim_NN1>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN2_bisided
+count = 2218
+'<3dClustSim_NN2
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="bi-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 4942 5357 5818 6292 6914 7749 9004 10651 12884 17309
+ 3770 4081 4403 4841 5257 5951 6840 8076 9691 13115
+ 2827 3032 3283 3584 3955 4424 5195 6050 7456 9920
+ 2103 2225 2421 2631 2895 3254 3743 4436 5367 7373
+ 1493 1597 1723 1854 2048 2269 2595 2988 3736 5214
+ 1057 1130 1221 1317 1426 1592 1794 2099 2594 3512
+ 723 772 828 879 953 1072 1191 1369 1632 2343
+ 475 497 530 567 610 672 742 858 1027 1375
+ 279 294 312 332 357 388 423 479 561 734
+ 203 213 224 239 254 274 302 345 394 515
+ 133 139 146 154 164 178 196 222 255 322
+ 95 100 105 111 118 128 139 155 182 226
+ 70 74 77 81 87 94 103 115 132 161
+ 46 48 51 54 57 61 66 74 85 106
+ 34 35 37 39 42 45 48 53 61 77
+ 28 29 30 32 34 36 39 43 49 62
+ 21 22 23 24 26 27 29 33 37 46
+ 17 17 18 19 20 22 23 25 29 37
+ 14 14 15 16 16 17 19 21 24 30
+ 10 11 11 12 12 13 14 16 18 22
+ 8 9 9 10 10 11 12 13 14 17
+ 7 8 8 8 9 9 10 11 12 15
+ 6 6 7 7 7 8 8 9 10 12
+ 5 5 6 6 6 6 7 8 8 10
+ 5 5 5 5 5 6 6 6 7 9
+ 4 4 4 4 4 5 5 5 6 7
+ 3 3 3 4 4 4 4 4 5 6
+ 3 3 3 3 3 3 4 4 4 5
+ 3 3 3 3 3 3 3 3 4 4
+</3dClustSim_NN2>~
+
+type = string-attribute
+name = AFNI_CLUSTSIM_NN3_bisided
+count = 2222
+'<3dClustSim_NN3
+  ni_type="10*float"
+  ni_dimen="29"
+  commandline="3dClustSim -prefix ttest++_result_030.CSimA -LOTS -both -nodec -cmd ttest++_result_030.CSimA.cmd -insdat group_mask.inter.nii.gz ./ttest++_result_030.0000.sdat ./ttest++_result_030.0001.sdat ./ttest++_result_030.0002.sdat ./ttest++_result_030.0003.sdat ./ttest++_result_030.0004.sdat ./ttest++_result_030.0005.sdat ./ttest++_result_030.0006.sdat ./ttest++_result_030.0007.sdat ./ttest++_result_030.0008.sdat ./ttest++_result_030.0009.sdat ./ttest++_result_030.0010.sdat ./ttest++_result_030.0011.sdat ./ttest++_result_030.0012.sdat ./ttest++_result_030.0013.sdat ./ttest++_result_030.0014.sdat ./ttest++_result_030.0015.sdat"
+  thresholding="bi-sided"
+  nxyz="96,114,96"
+  dxyz="2.000,2.000,2.000"
+  fwhmxyz="0.00,0.00,0.00"
+  iter="10080"
+  pthr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.015,0.01,0.007,0.005,0.003,0.002,0.0015,0.001,0.0007,0.0005,0.0003,0.0002,0.00015,0.0001,7e-05,5e-05,3e-05,2e-05,1.5e-05,1e-05"
+  athr="0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01"
+  mask_dset_idcode="AFN_DkFF0niBETbsB2XIS8GHaA"
+  mask_dset_name="/lscratch/42116461/group_mask.inter.nii.gz"
+  mask_count="206167" >
+ 5783 6219 6735 7423 8205 9052 10833 12585 15461 20550
+ 4375 4724 5098 5544 6197 6920 8036 9321 11582 16168
+ 3297 3560 3839 4226 4626 5225 6028 7006 8579 12075
+ 2377 2564 2757 3068 3418 3755 4329 5212 6280 8466
+ 1699 1817 1952 2122 2331 2635 2973 3503 4269 5868
+ 1169 1242 1341 1451 1582 1762 2033 2320 2918 4009
+ 793 846 900 979 1078 1194 1340 1561 1847 2702
+ 510 537 581 624 678 737 835 949 1142 1511
+ 295 314 332 351 380 414 459 519 618 795
+ 212 221 238 252 269 290 319 367 429 548
+ 138 144 153 162 172 189 206 231 268 337
+ 98 103 108 115 123 133 144 163 193 238
+ 72 75 79 84 89 97 105 118 138 172
+ 47 50 52 55 58 63 68 76 87 113
+ 35 36 38 41 43 46 49 55 62 80
+ 28 30 31 33 35 37 40 44 50 64
+ 21 22 23 25 26 28 30 33 38 48
+ 17 18 18 19 21 22 24 26 30 38
+ 14 14 15 16 17 18 19 21 24 30
+ 11 11 11 12 12 13 14 16 18 22
+ 8 9 9 10 10 11 12 13 14 18
+ 7 8 8 8 9 9 10 11 12 15
+ 6 6 7 7 7 8 8 9 10 12
+ 5 5 6 6 6 6 7 8 8 10
+ 5 5 5 5 5 6 6 7 7 9
+ 4 4 4 4 4 5 5 5 6 7
+ 3 3 3 4 4 4 4 4 5 6
+ 3 3 3 3 3 3 4 4 4 5
+ 3 3 3 3 3 3 3 3 4 4
+</3dClustSim_NN3>~

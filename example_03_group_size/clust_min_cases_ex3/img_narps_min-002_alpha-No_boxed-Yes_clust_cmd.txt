@@ -1,0 +1,7 @@
+3dClusterize                                  \
+    -NN 2 -clust_nvox 33                              \
+    -idat 0                         \
+    -ithr 1                         \
+    -bisided -3.290527 3.290527                         \
+    -pref_map clust_min_cases_ex3/__tmp_chauf_KCGeuwskGfb/olay_clust.nii      \
+    -inset  group_analysis.CSIM.1grp.equalRange.gain.min-002/ttest++_result_002+tlrc.HEAD
