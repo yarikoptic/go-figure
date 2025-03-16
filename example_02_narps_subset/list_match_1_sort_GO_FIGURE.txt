@@ -1,0 +1,9 @@
+0.839     data_00_basic_narps_hyp_1/NARPS-K9P0/hypo1_unthresh.nii.gz
+0.887     data_00_basic_narps_hyp_1/NARPS-U26C/hypo1_unthresh.nii.gz
+0.777     data_00_basic_narps_hyp_1/NARPS-6VV2/hypo1_unthresh.nii.gz
+0.714     data_00_basic_narps_hyp_1/NARPS-1KB2/hypo1_unthresh.nii.gz
+0.610     data_00_basic_narps_hyp_1/NARPS-43FJ/new_hypo1_unthresh.nii.gz
+0.577     data_00_basic_narps_hyp_1/NARPS-0JO0/hypo1_unthresh.nii.gz
+0.695     data_00_basic_narps_hyp_1/NARPS-X1Y5/hypo1_unthresh.nii.gz
+0.219     data_00_basic_narps_hyp_1/NARPS-R42Q/hypo1_unthresh.nii.gz
+0.037     data_00_basic_narps_hyp_1/NARPS-XU70/hypo1_unthresh.nii.gz
