@@ -1,0 +1,33 @@
+vorig
+    EPI
+    anat
+    olap
+ve2a
+    epi2anat
+    mask2final
+vstat
+    Full_Fstat
+    checkbrd_0_Coef
+mot
+    enormoutlr
+    VR6
+    grayplot
+regr
+    ideal
+    stims
+    df
+    corr_errts
+    tsnr_vreg
+    tsnr_fin
+radcor
+    rc_regress_d02
+warns
+    xmat
+    cen_total
+    cen_stim
+    decon
+    press
+    sat_4095
+    vlines
+qsumm
+    ssrev

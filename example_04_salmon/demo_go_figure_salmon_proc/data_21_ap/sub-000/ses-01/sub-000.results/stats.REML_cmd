@@ -1,0 +1,6 @@
+# 3dDeconvolve -input pb05.sub-000.r01.scale+orig.HEAD pb05.sub-000.r02.scale+orig.HEAD -censor censor_sub-000_combined_2.1D -ortvec mot_demean.r01.1D mot_demean_r01 -ortvec mot_demean.r02.1D mot_demean_r02 -polort 3 -num_stimts 1 -stim_times 1 stimuli/offset_stim_checkbrd.1D 'BLOCK(10,1)' -stim_label 1 checkbrd -fout -tout -x1D X.xmat.1D -xjpeg X.jpg -x1D_uncensored X.nocensor.xmat.1D -errts errts.sub-000 -bucket stats.sub-000
+
+3dREMLfit -matrix X.xmat.1D \
+ -input "pb05.sub-000.r01.scale+orig.HEAD pb05.sub-000.r02.scale+orig.HEAD" \
+ -fout -tout -Rbuck stats.sub-000_REML -Rvar stats.sub-000_REMLvar \
+ -Rerrts errts.sub-000_REML -verb $*

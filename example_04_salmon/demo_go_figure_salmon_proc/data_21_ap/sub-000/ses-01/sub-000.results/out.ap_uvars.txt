@@ -1,0 +1,7 @@
+  mot_limit          : 0.2
+  out_limit          : 0.05
+  copy_anat          : sub-000_ses-01_run-01_T1w_ROT+orig.HEAD
+  mask_dset          : mask_epi_anat.sub-000+orig.HEAD
+  ss_review_dset     : out.ss_review.sub-000.txt
+  max_4095_warn_dset : out.4095_warn.txt
+  vlines_tcat_dir    : vlines.pb00.tcat

@@ -1,0 +1,85 @@
+{
+    "subject ID": "sub-000",
+    "AFNI version": "AFNI_25.0.07",
+    "AFNI package": "linux_rocky_8",
+    "TR": "2.0",
+    "TRs removed (per run)": "3",
+    "multiband level": "1",
+    "slice timing pattern": "simult",
+    "num stim classes provided": "1",
+    "final anatomy dset": "anat_final.sub-000+orig.HEAD",
+    "final stats dset": "stats.sub-000+orig.HEAD",
+    "orig voxel counts": [
+        "70",
+        "70",
+        "37"
+    ],
+    "orig voxel resolution": [
+        "2.000000",
+        "2.000000",
+        "2.500000"
+    ],
+    "orig volume center": [
+        "1.822998",
+        "-14.525002",
+        "-1.828899"
+    ],
+    "final voxel resolution": [
+        "2.000000",
+        "2.000000",
+        "2.000000"
+    ],
+    "motion limit": "0.2",
+    "num TRs above mot limit": "0",
+    "average motion (per TR)": "0.00612541",
+    "average censored motion": "0.00612541",
+    "max motion displacement": "0.306209",
+    "max censored displacement": "0.306209",
+    "outlier limit": "0.05",
+    "average outlier frac (TR)": "0.000663442",
+    "num TRs above out limit": "0",
+    "num runs found": "2",
+    "num TRs per run": [
+        "167",
+        "167"
+    ],
+    "num TRs per run (applied)": [
+        "167",
+        "167"
+    ],
+    "num TRs per run (censored)": [
+        "0",
+        "0"
+    ],
+    "fraction censored per run": [
+        "0",
+        "0"
+    ],
+    "TRs total (uncensored)": "334",
+    "TRs total": "334",
+    "degrees of freedom used": "21",
+    "degrees of freedom left": "313",
+    "final DF fraction": "0.937126",
+    "TRs censored": "0",
+    "censor fraction": "0.000000",
+    "num regs of interest": "1",
+    "num TRs per stim (orig)": "240",
+    "num TRs censored per stim": "0",
+    "fraction TRs censored": "0.000",
+    "ave mot per sresp (orig)": "0.006049",
+    "ave mot per sresp (cens)": "0.006049",
+    "TSNR average": "99.2113",
+    "global correlation (GCOR)": "0.000501278",
+    "anat/EPI mask Dice coef": "0.447267",
+    "maximum F-stat (masked)": "15.5032",
+    "blur estimates (ACF)": [
+        "0.993981",
+        "2.64721",
+        "2.18811"
+    ],
+    "blur estimates (FWHM)": [
+        "0",
+        "0",
+        "0"
+    ]
+}

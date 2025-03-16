@@ -1,0 +1,7 @@
+3dClusterize                                  \
+    -NN 2 -clust_nvox 13 -mask mask_anat_in_epi_final.nii.gz                              \
+    -idat 1                         \
+    -ithr 2                         \
+    -bisided -3.321881 3.321881                         \
+    -pref_map ./__tmp_chauf_yFQ2X4mGuzY/olay_clust.nii      \
+    -inset  stats.sub-000+orig.HEAD

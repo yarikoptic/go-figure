@@ -1,0 +1,34 @@
+{
+    "itemtype": "CBAR",
+    "cbar": "gray_scale",
+    "pbar_fname": "qc_00_vorig_EPI.pbar.jpg",
+    "pbar_bot": 0,
+    "pbar_top": 1509.0,
+    "pbar_comm": "98%ile in vol",
+    "pbar_sign": "+",
+    "olay_alpha": "No",
+    "olay_boxed": "No",
+    "olay_opacity": 9,
+    "see_olay": "+",
+    "subbb": [
+        -1,
+        -1,
+        -1
+    ],
+    "coor_type": "SET_DICOM_XYZ",
+    "coors": [
+        10.823,
+        -13.525,
+        -1.828899
+    ],
+    "is_left_left": "YES",
+    "is_left_post": "NO",
+    "vthr": 0,
+    "vthr_comm": "",
+    "gen_comm": "",
+    "ulay_bot": 0,
+    "ulay_top": 1509.0,
+    "ulay_globran": "VOLUME",
+    "ulay_comm": "",
+    "pbar_for": "dset"
+}

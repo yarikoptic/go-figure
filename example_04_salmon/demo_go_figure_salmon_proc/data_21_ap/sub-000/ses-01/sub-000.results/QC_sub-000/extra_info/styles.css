@@ -1,0 +1,612 @@
+
+/* Include nice (open) font for reading */
+@font-face {
+  font-family: 'myFiraCode';
+  src: url('FiraCode-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'myFiraCode';
+  src: url('FiraCode-Bold.woff2') format('woff2');
+  font-weight: bold;
+}
+
+h1 {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin: 0px;
+    border: 0px;
+    color: #FFC310; /* #ccc; */
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 26px;
+    font-family: myFiraCode, "courier new", courier, monospace;
+}
+
+h2 {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    color: #fff; /* #ccc; #FFC310; */
+    font-weight: bold;
+    font-size: 26px;
+    font-family: myFiraCode, "courier new", courier, monospace;
+}
+
+h3 {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    color: #ccc; /* #FFC310; #ccc; #FFC310; */
+    font-weight: bold;
+    font-size: 26px;
+    font-family: myFiraCode, "courier new", courier, monospace;
+}
+
+
+/* have padding at top and bottom of each main section*/ 
+.div_pad_class{
+    padding: 25px 0px 15px 0px;
+    margin: 0px;
+}
+
+img {
+    padding: 2px 1px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    width:90%; 
+}
+
+pre {
+    font-family: myFiraCode, "courier new", courier, monospace;
+    font-size: 20px;
+    color: #FFC310;
+}
+
+body {
+    background-color: #014E33;
+    font-family: "Lucida Console", Monaco, monospace;
+    margin: 0px;
+}
+
+.hr_sec {
+    display: block;
+    height: 3px;
+    /* border: 0; */
+    /* border-top: 2px solid #ccc; */
+    background-color: #ccc;
+    margin: 0px 0px 10px 0px;
+    padding: 0;
+}
+
+.padtop {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin: 0px;
+    /*text-decoration: underline;*/
+}
+
+
+.bordered {
+    padding: 0px;
+    margin:  0px;
+    border:  2px solid black;
+}
+
+.warnbord {
+    padding: 0px;
+    border:  2px solid black;
+    color: #000000;
+    background-color: #FFFFFF; /*#FFC3C4; */
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%; 
+    text-align: left;
+    font-family: "courier new", courier, monospace;
+    font-weight: bold;
+}
+
+.wcol_none {
+    text-align: center;
+    background-color: #CCFFCC;
+}
+
+.wcol_undecided {
+    text-align: center;
+    background-color: #EAEA99;
+}
+
+.wcol_mild {
+    text-align: center;
+    background-color: #FFC3C4;
+}
+
+.wcol_medium {
+    text-align: center;
+    background-color: #FF7F7F;
+}
+
+.wcol_severe {
+    text-align: center;
+    background-color: #FF0000;
+}
+
+.datbord {
+    padding: 0px;
+    border:  2px solid black;
+    color: #000000;
+    background-color: #ffffff;
+    padding-left: 20px;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width:90%; 
+    text-align: left;
+    font-family: "courier new", courier, monospace;
+    font-weight: bold;
+}
+
+
+.btn_mtedana {  
+    background-color: #FFC310;
+    margin-top: 5px;
+    padding: 5px 15px 5px ;
+    color: #014E33;
+    border: solid 2px black;
+    border-radius: 20px;
+    font-family:  Arial, "courier new", courier, monospace;
+    font-size: 16px;
+    font-weight: normal; 
+}
+
+.btn_mtedana:hover:not(.active) {
+    background-color: #014E33;
+    margin-top: 5px;
+    padding: 5px 15px 5px ;
+    color: #FFC310;
+    border: solid 2px #FFC310;
+    border-radius: 20px;
+    font-family:  Arial, "courier new", courier, monospace;
+    font-weight: normal; 
+}
+
+.btn_mtedana:focus:not(.active) {
+    border: dashed 2px #ffea00!important;
+}
+
+
+
+.container {
+    text-align: center;
+    padding-top: 0px;
+    margin: 0px;
+    padding: px
+}
+
+.container pre {
+    margin: 3px;
+    padding-top: 20px;
+    white-space: pre;
+    display: inline-block;
+    text-align: left;
+    font-family: myFiraCode, "courier new", courier, monospace;
+    font-size: 20px;
+    color: #FFC310;
+}
+
+.container2 {
+    text-align: center;
+    padding-top: 0px;
+    margin: 3px;
+}
+
+.container2 pre {
+    margin: 3px;
+    padding-top: 0px;
+    white-space: pre;
+    display: inline-block;
+    text-align: left;
+    font-family: myFiraCode, "courier new", courier, monospace;
+    font-size: 20px;
+    color: #ccc;
+}
+
+img.pbar {
+    width: 16ch;  /* 200px; 20rem; */
+/*    border:  2px solid black; */
+    height: 0.7em; /* 14px; */
+    text-align: middle;
+    margin: 0px;
+    border: 0px;
+    padding: 0px 0ch; /* 4px; */
+}
+
+.navbar {
+    position: fixed; 
+    width: 100%;
+    padding-top: 2px;
+    padding-bottom: 0px;
+    height: 70px;
+    width:100%;
+    background-color: #000; /* #444; */
+    border-bottom: 3px solid #222; /*#ddd; #fff; */
+    /* margin: 5px solid #000; */
+}
+
+table, tr {
+    table-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #000; /* #444; */
+    border-collapse: collapse;
+    border-bottom:  0px solid #ccc;
+    top: 0;
+    font-family: myFiraCode, "courier new", courier, monospace;
+    font-size: 20px;
+    /* color: #ccc; */
+}
+
+td {
+    float: left;
+    width: 80px;
+    height: 30px;
+    background-color: #000; /* #444; */
+    border: 0px solid #bbb;
+    margin: 0px;
+    padding: 1px;
+}
+
+td a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-vertical: center;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none;
+}
+
+td a:hover:not(.active) {
+    background-color: #111;
+    color: #ffea00; /* yellow; */
+}
+
+td a:active {
+    background-color: #4CAF50;
+    color: green;
+}
+
+
+/* slightly lighter color and boldness for hyperlinks */
+urlin a {
+    color: #ffea00;
+    font-weight: bold;
+}
+
+urlin a:hover:not(.active) {
+    background-color: #014E33;
+    color: #FFC310;
+}
+
+
+
+
+/* Applies to all buttons */
+.button-generic {
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle; /* text-vertical: center; */
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Applies to LHS buttons: .btn1, .btn5, .btn0 */
+.button-LHS {
+    background-color: #000; /* #444; */
+    height: 28px;
+    margin: 1px 3px;
+    padding: 0px; 
+    width: 74px;
+}
+
+/* "QC:" or "SET:" button, and background button in navbar */
+.btn0 {
+    color: #FFF;
+    border: none;
+    border-radius: 0px;
+    font-family: "courier new", courier, monospace;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+/* QC buttons */
+.btn1 { 
+    color: #000; /* #444; */
+    border: solid 2px #bbb; /* transparent; none; */
+    border-radius: 12px;
+    font-family:  "courier new", courier, monospace;
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* section labels */
+.btn5 {  
+    color: #FFF; /* #ffea00; /#FFF; */
+    border: solid 1px transparent;
+    border-radius: 0px;
+    font-family: Arial, "courier new", courier, monospace;
+    font-size: 21px;
+    font-weight: normal; /* bold; */
+}
+
+/* For NiiVue (NV) and AfniView (AV) buttons; 
+   these know if server is serving */
+.btn6 {
+    color:            var(--SavingTextColB6);
+    background-color: var(--SavingBkgdColB6);
+    margin: 4px 2px 0px 3px;
+    height: 26px;
+    width: 40px;
+    padding: 0px 2px;
+    float: right;
+}
+
+/* turning img/text headings into (subtle) buttons */
+.btn_title {
+    background-color: #014E33;
+    font-family: "Lucida Console", Monaco, monospace;
+    border: solid 0px #014E33!important;
+    border-color: #014E33!important; 
+}
+
+/* ... and the container/div holding the buttons */
+.container_avnv {
+    width: 160px;  /* if more btns added, make wider */
+    white-space:nowrap; 
+    position: absolute; 
+    top: -34; 
+    right: 5%;
+}
+
+/* for NV canvas properties */
+canvas {
+    outline: none;      /* no outline */
+}
+
+/* For Graphview (GV) and InstaCorr (IC) buttons; 
+   these know if server is serving */
+.btn6b {
+    color:            var(--SavingTextColB6);
+    background-color: var(--SavingBkgdColB6);
+    margin: 4px 2px 0px 3px;
+    height: 26px;
+    width: 40px;
+    padding: 0px 2px;
+    float: left;
+}
+/* ... and the container/div holding the IC/GV buttons */
+.container_icgv {
+    width: 160px; 
+    white-space:nowrap; 
+    position: absolute; 
+    top: -34; 
+    left: 5%;
+}
+
+/* Formatting for NiiVue (NV) canvas */
+.class_niivue {
+    width: 90%; 
+    aspect-ratio: 5 / 1; /* bit higher than value in toggle NV func */
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+/* NV canvas button: show/hide olay (for align) */
+.btn7 {
+    color:            #000;
+    background-color: #ccc; /*#029a64;*/
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+    height: 24px;  /* set size, so no shifting */
+    width: 96px;  /* set size, so no shifting */
+    border: 1px solid;
+    border-color:  #fff #aaa #aaa #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: Arial, "courier new", courier, monospace;
+    font-size: 18px;
+    font-weight: normal; /* bold; */
+}
+
+/* add subj ID to navbar*/
+.subj_text {
+    color: #000; 
+    background-color: #ccc; 
+    padding: 0px 2px; 
+    margin: 2px 0px 0px 6px; 
+    border: 0px 0px 0px 0px solid #000; 
+    font-size: 22px; 
+}
+
+
+
+/* see: https://fvsch.com/styling-buttons/ */
+/* Firefox: removes the inner border shown on focus */
+.btn5::-moz-focus-inner {
+  border: none;
+}
+
+/* Applies to .btn2* (A+, Ax) and .btn3saving (Server) */
+.button-RHS {
+    border: solid 1px transparent;
+    border-radius: 4px;
+    font-family: "courier new", courier, monospace;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.button-RHS-little {
+    float: left;
+    margin: 4px 2px 0px 3px;
+    height: 26px;
+    width: 40px;
+    padding: 0px 2px;
+}
+
+.btn2good {
+    background-color: #67a9cf;
+    color: #FFF;
+}
+
+.btn2bad {
+    background-color: #d7191c;
+    color: #000;
+}
+
+.btn2other {
+    background-color: #fff;
+    color: #777;
+}
+
+.btn2clear {
+    background-color: #777;
+    color: #fff;
+    padding: 0px 0px;
+}
+
+.btn3help {
+    background-color: #F0F0F0;
+    float: left;
+    margin: 3;
+    width: 86px;
+    height: 28px;
+    padding: 2px 2px;
+}
+
+/* Now, server button color is from a variable that can be re-set by 
+   whether the server is running or not
+*/
+.btn3saving {
+    color:            var(--SavingTextCol);
+    background-color: var(--SavingBkgdCol);
+    text-decoration:  var(--SavingTextDec);
+    text-decoration-thickness: 10%;
+    text-decoration-color: #d7191c;
+    float: left;
+    margin: 3;
+    /*width: 86px;*/
+    width: 74px;
+    height: 28px;
+    padding: 0px 2px;
+    font-size: 24px;
+    border-radius: 0px;
+    cursor: auto;
+}
+
+
+/* Use this so that the saving/rating button is passive, nonclickable
+*/
+.disabled {
+    pointer-events: none; 
+}
+
+
+/* help button color just on its own */
+.btn3help {
+    background-color: #F0F0F0;
+    color: #000;
+}
+
+
+button:hover:not(.active) {
+    background-color: #333;
+    color: #ffea00; /* yellow; */
+    border: solid 2px #ffea00!important;
+    border-color: #ffea00!important; /* yellow; */
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* For the commenting buttons! */
+
+/* The popup form format - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+  width: 400px;
+  height: 75px;
+  top: 75px;
+  right: 15px;
+  /* border: 3px solid #f1f1f1; */
+  /* z-index: 9; */
+}
+
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 400px;
+  padding: 5px 5px 35px 5px;
+  background-color: #ccc;
+}
+
+/* Full-width input fields */
+.form-container textarea[type=text] {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin: 0px 0px 0px 0px;
+  border: none;
+  background: #eee;
+  font-family: helvetica, "courier new", courier, monospace;
+  font-size: 18px;
+  color: black;
+}
+
+
+/* When the inputs get focus, do something */
+.form-container textarea[type=text]:focus {
+  background-color: #FFF;
+  outline: none;
+}
+
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #7ece8c;
+  padding: 0px 0px;
+  border: 3px solid #5f926a;
+  float: left;
+  cursor: pointer;
+  margin:0;
+  width: 33.3%;
+  height: 30px;
+  opacity: 1;
+  font-weight: bold;
+  /*color: #FFF;*/
+  color: #000;
+}
+
+/* Add a yellow background color to the cancel (clear text) button */
+.form-container .cancel {
+  background-color: #f3c36b; /*#c0ce7e;*/
+  border: 3px solid #a06c0d; 
+  color: #000;
+}
+
+/* Add a red background color to the clear-all button */
+.form-container .clearall {
+  background-color: #f36b9b;
+  border: 3px solid #c20000;
+  color: #000;
+}
+
+

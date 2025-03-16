@@ -1,0 +1,33 @@
+{
+    "itemtype": "CBAR",
+    "cbar": "CET_L17",
+    "pbar_fname": "qc_15_regr_tsnr_fin.pbar.jpg",
+    "pbar_bot": 0,
+    "pbar_top": 190,
+    "pbar_comm": "95%ile in mask",
+    "pbar_sign": "+",
+    "olay_alpha": "No",
+    "olay_boxed": "No",
+    "olay_opacity": 5,
+    "see_olay": "+",
+    "subbb": [
+        0,
+        0,
+        0
+    ],
+    "coor_type": "SET_DICOM_XYZ",
+    "coors": [
+        2.135498,
+        -13.301,
+        -1.328899
+    ],
+    "is_left_left": "YES",
+    "is_left_post": "NO",
+    "vthr": 0,
+    "vthr_comm": "",
+    "gen_comm": " info: 5-95%ile TSNR in mask: 45 - 190",
+    "ulay_bot": 0.0,
+    "ulay_top": 1403.25408,
+    "ulay_globran": "VOLUME",
+    "ulay_comm": ""
+}

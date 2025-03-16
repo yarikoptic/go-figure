@@ -1,0 +1,14 @@
+{
+    "itemtype": "VOL",
+    "itemid": "Full_Fstat",
+    "blockid": "vstat",
+    "blockid_hov": "statistics vols",
+    "title": "Check statistics vols (and effect estimates)",
+    "text": [
+        "olay: [0] 'Full_Fstat' (in stats.sub-000)",
+        " thr: [0] 'Full_Fstat' (df = 1 313)"
+    ],
+    "av_file": "run_qc_05_vstat_Full_Fstat.tcsh",
+    "ic_file": "run_instacorr_errts.tcsh",
+    "gv_file": "run_graphview_errts.tcsh"
+}

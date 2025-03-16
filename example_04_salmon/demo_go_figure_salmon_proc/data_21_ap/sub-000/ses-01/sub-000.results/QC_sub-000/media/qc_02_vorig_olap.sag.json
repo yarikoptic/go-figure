@@ -1,0 +1,8 @@
+{
+    "itemtype": "VOL",
+    "itemid": "olap",
+    "blockid": "vorig",
+    "blockid_hov": "vols in orig space",
+    "title": "Check vols in original space",
+    "text": "Initial overlap, no obliquity: anat (ulay) and EPI (olay)"
+}

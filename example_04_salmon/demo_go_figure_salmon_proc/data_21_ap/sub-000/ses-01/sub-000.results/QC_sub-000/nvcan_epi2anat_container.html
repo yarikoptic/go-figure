@@ -1,0 +1,137 @@
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="extra_info/styles.css" />
+  <script src="/assets/niivue_afni.umd.js"> </script>
+  <script type="text/javascript">
+
+    /* show/hide olay in NV (for align checks)
+        obj : NV object ID
+        bid : button ID in that object's NV canvas
+    */
+    function niivue_ShowHideOlay(obj, bid) {
+      let element = document.getElementById(bid);
+      if (obj.volumes[1].opacity) {
+        obj.setOpacity(1, 0);
+        element.innerText = "View Olay";
+      } else {
+        obj.setOpacity(1, 1);
+        element.innerText = "Hide Olay";
+      }
+    }
+
+    // used for string formatting numbers (C Rorden), below
+    function flt2str0(flt, ndec = 0) {
+      //retain trailing zero
+      return flt.toFixed(ndec); //return string
+    }
+
+    /* more string formatting numbers, below ... WITH directionality here,
+       assuming the coords are what AFNI calls LPI (and what some other
+       software call RAS); basically, L/P/I are neg coords, and R/A/S are
+       positive.  
+    */
+    function flt2str0_dir(flt, ndec = 0, dir = '') {
+      //retain trailing zero
+      if (dir == '') {
+        return flt.toFixed(ndec); //return string
+      } else if (dir == 'RL') {
+        let aflt = Math.abs(flt);
+        let lab = (flt < 0) ? 'L' : 'R';
+        return aflt.toFixed(ndec) + lab;
+      } else if (dir == 'AP') {
+        let aflt = Math.abs(flt);
+        let lab = (flt < 0) ? 'P' : 'A';
+        return aflt.toFixed(ndec) + lab;
+      } else if (dir == 'IS') {
+        let aflt = Math.abs(flt);
+        let lab = (flt < 0) ? 'I' : 'S';
+        return aflt.toFixed(ndec) + lab;
+      } else {
+        return '';
+      }
+    }
+
+  </script>
+</head>
+<body>
+
+<!-- start NiiVue canvas for: nvcan_epi2anat -->
+<div class="class_niivue" id="nvcan_epi2anat_container">
+  <canvas id="nvcan_epi2anat">
+  </canvas>
+  <footer id="nvcan_epi2anat_xyz" style="color:#fff; ">
+    &nbsp;
+  </footer>
+  
+  <button class="button-generic btn7"
+          id="nvcan_epi2anat_btnSHO" 
+          onclick="niivue_ShowHideOlay(nvobj_epi2anat, 'nvcan_epi2anat_btnSHO')">
+  Hide Olay
+  </button>
+
+  <script>
+    function reportCoorAndValues(data) {
+      // coord str
+      let x = flt2str0_dir(data.mm[0], 3, 'RL')
+      let y = flt2str0_dir(data.mm[1], 3, 'AP')
+      let z = flt2str0_dir(data.mm[2], 3, 'IS')
+      let str_c = '&nbspxyz:[' + 
+                  x.padStart(8).replace(/ /g, '&nbsp;') + ' ' +
+                  y.padStart(8).replace(/ /g, '&nbsp;') + ' ' +
+                  z.padStart(8).replace(/ /g, '&nbsp;') + '], '
+      // value str (accommodate Olay/Thr being present or not)
+      let u = flt2str0(data.values[0].value, 6)   // always have ulay
+      let o = 'NA';
+      let t = 'NA';
+      if (data.values.length > 1) { // do we have olay?
+        o = flt2str0(data.values[1].value, 6);
+      }
+      if (data.values.length > 2) { // do we have thr?
+        t = flt2str0(data.values[2].value, 6);
+      }
+      let str_v = 'UOT:[' + 
+                  u.padStart(12).replace(/ /g, '&nbsp;') + ' ' + 
+                  o.padStart(12).replace(/ /g, '&nbsp;') + ' ' + 
+                  t.padStart(12).replace(/ /g, '&nbsp;') + ']' 
+      document.getElementById('nvcan_epi2anat_xyz').innerHTML = str_c + str_v;
+    }
+
+    const nvobj_epi2anat = new niivue.Niivue(
+      { logging: true, 
+        show3Dcrosshair: true,
+        onLocationChange: reportCoorAndValues,
+      }
+    )
+    nvobj_epi2anat.opts.isColorbar = false; // just use from HTML
+    nvobj_epi2anat.opts.sagittalNoseLeft = true;
+    nvobj_epi2anat.opts.isRadiologicalConvention = false;
+    nvobj_epi2anat.opts.isCornerOrientationText = true;
+    nvobj_epi2anat.attachTo('nvcan_epi2anat');
+    nvobj_epi2anat.loadVolumes([
+      { // ulay
+        url:"../final_epi_vr_base_min_outlier+orig.HEAD",
+        cal_max: 1590.54272,
+      }, { // olay
+        url:"../anat_final.sub-000+orig.HEAD",
+        frame4D: 0,  // idx of vol
+        colormap: "gray",
+        cal_min: 0,
+        cal_max: 1146.0,
+        opacity: 1.0,
+      }
+    ]).then(()=>{ // more actions
+      if ( nvobj_epi2anat.volumes.length > 1 ) {
+        nvobj_epi2anat.volumes[1].alphaThreshold = false; // alpha for olay
+      }
+      nvobj_epi2anat.overlayOutlineWidth = 0;
+      nvobj_epi2anat.opts.multiplanarForceRender = true;
+      nvobj_epi2anat.backgroundMasksOverlays = true;
+      // no setModulationImage(), bc modulation is not used
+      nvobj_epi2anat.scene.crosshairPos = nvobj_epi2anat.mm2frac([-2.822998, -12.6135, -0.828899]); // jump to XYZ
+      nvobj_epi2anat.updateGLVolume();
+    })
+  </script>
+</div>
+</body>
+</html>

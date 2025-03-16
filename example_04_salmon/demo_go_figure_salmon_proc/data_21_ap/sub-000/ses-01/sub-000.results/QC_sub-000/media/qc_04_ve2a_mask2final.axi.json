@@ -1,0 +1,12 @@
+{
+    "itemtype": "VOL",
+    "itemid": "mask2final",
+    "blockid": "ve2a",
+    "blockid_hov": "vol alignment (EPI-anat)",
+    "title": "Check vol alignment (EPI to anat)",
+    "text": [
+        "ulay: anat_final.sub-000 (final anatomical dset)",
+        "olay: mask_epi_anat.sub-000 (final EPI mask coverage)"
+    ],
+    "av_file": "run_qc_04_ve2a_mask2final.tcsh"
+}

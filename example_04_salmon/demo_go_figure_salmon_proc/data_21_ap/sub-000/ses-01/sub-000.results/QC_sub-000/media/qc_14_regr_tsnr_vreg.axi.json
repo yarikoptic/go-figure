@@ -1,0 +1,16 @@
+{
+    "itemtype": "VOL",
+    "itemid": "tsnr_vreg",
+    "blockid": "regr",
+    "blockid_hov": "regressors",
+    "title": "Check regressors, DFs and residuals",
+    "text": [
+        "olay: TSNR.vreg.r01.sub-000 (TSNR, from r01 dset after volreg)",
+        "mask: mask_epi_anat.sub-000 (for percentile range)"
+    ],
+    "ic_file": "run_instacorr_pbrun.tcsh",
+    "ic_args": "pb03 r01",
+    "gv_file": "run_graphview_pbrun.tcsh",
+    "gv_args": "pb03 r01",
+    "av_file": "run_qc_14_regr_tsnr_vreg.tcsh"
+}

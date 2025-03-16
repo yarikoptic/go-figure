@@ -1,0 +1,8 @@
+{
+    "itemtype": "VOL",
+    "itemid": "vlines",
+    "blockid": "warns",
+    "blockid_hov": "all warnings from processing",
+    "title": "Check all warnings from processing",
+    "subtext": "ulay: vlines.pb00.tcat/var*scale*.nii.gz (scaled variance per run)"
+}

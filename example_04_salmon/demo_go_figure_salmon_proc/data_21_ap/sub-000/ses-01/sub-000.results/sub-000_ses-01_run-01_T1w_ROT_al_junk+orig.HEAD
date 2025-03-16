@@ -1,0 +1,147 @@
+
+type = string-attribute
+name = HISTORY_NOTE
+count = 1378
+'[taylorpa3@cn2882: Mon Mar 10 16:56:04 2025] {AFNI_25.0.07:linux_rocky_8} 3drotate -quintic -clipit -rotate -17.31I -7.57R -123.44A -ashift 0.00S 0.00L 0.00P -prefix sub-000_ses-01_run-01_T1w_ROT.nii.gz sub-000_ses-01_run-01_T1w.nii.gz\n[taylorpa3@cn4365: Mon Mar 10 17:06:03 2025] {AFNI_25.0.07:linux_rocky_8} 3dcopy /data/NIMH_SSCC/p022_dead_salmon/data_00_basic/sub-000/ses-01/anat/sub-000_ses-01_run-01_T1w_ROT.nii.gz sub-000.results/sub-000_ses-01_run-01_T1w_ROT\n[taylorpa3@cn4365: Mon Mar 10 17:07:01 2025] {AFNI_25.0.07:linux_rocky_8} 3dcopy ./sub-000_ses-01_run-01_T1w_ROT+orig ./__tt_sub-000_ses-01_run-01_T1w_ROT+orig\n[taylorpa3@cn4365: Mon Mar 10 17:08:57 2025] {AFNI_25.0.07:linux_rocky_8} 3dAllineate -base ./__tt_vr_base_min_outlier_ts_rs_ns+orig -1Dmatrix_apply ./sub-000_ses-01_run-01_T1w_ROT_al_junk_mat.aff12.1D -prefix ./sub-000_ses-01_run-01_T1w_ROT_al_junk -input ./__tt_sub-000_ses-01_run-01_T1w_ROT+orig -master SOURCE -weight_frac 1.0 -maxrot 6 -maxshf 10 -VERB -warp aff -source_automask+4 -onepass\n[taylorpa3@cn4365: Mon Mar 10 17:08:57 2025] align_epi_anat.py -anat2epi -anat  sub-000_ses-01_run-01_T1w_ROT+orig -suffix _al_junk -epi  vr_base_min_outlier+orig -epi_base 0 -epi_strip 3dAutomask  -anat_has_skull no -cost lpa+ZZ -pre_matrix  /data/NIMH_SSCC/p022_dead_salmon/data_00_basic/sub-000/ses-01/anat/mat_rot_anat.1D  -volreg off -tshift off~
+
+type  = float-attribute
+name  = ALLINEATE_MATVEC_B2S_000000
+count = 12
+      -0.554506     -0.0595402      -0.822549       0.577591      -0.296036
+        0.92032       0.140039        1.95056       0.763942       0.313886
+      -0.538995       0.419228
+
+type  = float-attribute
+name  = ALLINEATE_MATVEC_S2B_000000
+count = 12
+     -0.5640855     -0.3032233       0.782057      0.5894058    -0.05492506
+      0.9686064      0.3354785      -1.998242     -0.8314897      0.1342998
+     -0.5514927      0.4495023
+
+type = string-attribute
+name = ALLINEATE_WARP_TYPE
+count = 15
+'affine_general~
+
+type  = float-attribute
+name  = ALLINEATE_PARAMS_000000
+count = 12
+              0              0              0              0              0
+              0              1              1              1              0
+              0              0
+
+type = string-attribute
+name = TYPESTRING
+count = 15
+'3DIM_HEAD_ANAT~
+
+type = string-attribute
+name = IDCODE_STRING
+count = 27
+'AFN_wfcMDS0VYRMyoPkw_8b1KA~
+
+type = string-attribute
+name = IDCODE_DATE
+count = 25
+'Mon Mar 10 17:08:57 2025~
+
+type = integer-attribute
+name = SCENE_DATA
+count = 8
+ 0 11 0 -999 -999
+ -999 -999 -999
+
+type = string-attribute
+name = LABEL_1
+count = 5
+'zyxt~
+
+type = string-attribute
+name = LABEL_2
+count = 5
+'zyxt~
+
+type = string-attribute
+name = DATASET_NAME
+count = 5
+'zyxt~
+
+type = integer-attribute
+name = ORIENT_SPECIFIC
+count = 3
+ 0 2 4
+
+type  = float-attribute
+name  = ORIGIN
+count = 3
+       -77.8645         66.074       -51.3289
+
+type  = float-attribute
+name  = DELTA
+count = 3
+          0.625         -0.625              1
+
+type  = float-attribute
+name  = IJK_TO_DICOM
+count = 12
+          0.625              0              0       -77.8645              0
+         -0.625              0         66.074              0              0
+              1       -51.3289
+
+type  = float-attribute
+name  = IJK_TO_DICOM_REAL
+count = 12
+          0.625              0              0       -77.8645              0
+         -0.625              0         66.074              0              0
+              1       -51.3289
+
+type  = float-attribute
+name  = BRICK_STATS
+count = 2
+              0           1863
+
+type = integer-attribute
+name = DATASET_RANK
+count = 8
+ 3 1 0 0 0
+ 0 0 0
+
+type = integer-attribute
+name = DATASET_DIMENSIONS
+count = 5
+ 256 256 100 0 0
+
+type = integer-attribute
+name = BRICK_TYPES
+count = 1
+ 1
+
+type  = float-attribute
+name  = BRICK_FLOAT_FACS
+count = 1
+              0
+
+type = string-attribute
+name = BRICK_LABS
+count = 3
+'#0~
+
+type = string-attribute
+name = BRICK_KEYWORDS
+count = 1
+'~
+
+type = string-attribute
+name = TEMPLATE_SPACE
+count = 5
+'ORIG~
+
+type = integer-attribute
+name = INT_CMAP
+count = 1
+ 0
+
+type = string-attribute
+name = BYTEORDER_STRING
+count = 10
+'LSB_FIRST~

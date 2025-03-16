@@ -1,0 +1,37 @@
+tcsh -f @ss_review_basic
+1dplot -sepscl -volreg -ynames enorm outliers - \
+       -wintitle "mot params, enorm, outliers" dfile_rall.1D motion_sub-000_enorm.1D outcount_rall.1D &
+1dplot -one -censor_RGB green -censor censor_sub-000_combined_2.1D  \
+       outcount_rall.1D "1D: 334@0.05" &
+1dplot -one -censor_RGB green -censor censor_sub-000_combined_2.1D  \
+       motion_sub-000_enorm.1D "1D: 334@0.2" &
+afni anat_final.sub-000+orig.HEAD pb03.sub-000.r01.volreg+orig.HEAD &
+cat out.df_info.txt
+cat 3dDeconvolve.err
+1d_tool.py -show_cormat_warnings -infile X.xmat.1D
+1dplot -sepscl X.stim.xmat.1D &
+1dplot sum_ideal.1D &
+set pp = ( `3dBrickStat -slow -percentile 90 9 99 \
+            -mask mask_epi_anat.sub-000+orig stats.sub-000+orig"[0]"` )
+set thresh = $pp[2]
+echo -- thresholding F-stat at $thresh
+set frange = $pp[4]
+echo -- olay range of F-stat : $frange
+# locate peak coords of biggest masked cluster and jump there
+3dcalc -a stats.sub-000+orig"[0]" -b mask_epi_anat.sub-000+orig -expr "a*b" \
+       -overwrite -prefix .tmp.F
+set maxcoords = ( `3dclust -DAFNI_ORIENT=RAI -1thresh $thresh -dxyz=1 1 2 \
+       .tmp.F+orig | & awk '/^ / {print $14, $15, $16}' | head -n 1` )
+echo -- jumping to max coords: $maxcoords
+afni -com "OPEN_WINDOW A.axialimage"     \
+     -com "OPEN_WINDOW A.sagittalimage"  \
+     -com "SWITCH_UNDERLAY anat_final.sub-000" \
+     -com "SET_PBAR_ALL    +99 1 Plasma" \
+     -com "SWITCH_OVERLAY stats.sub-000"   \
+     -com "SET_SUBBRICKS A 0 0 0"        \
+     -com "SET_FUNC_RANGE A $frange"     \
+     -com "SET_THRESHNEW A $thresh"      \
+     -com "SET_FUNC_ALPHA  Yes"          \
+     -com "SET_FUNC_BOXED  Yes"          \
+     -com "SET_DICOM_XYZ A $maxcoords"
+

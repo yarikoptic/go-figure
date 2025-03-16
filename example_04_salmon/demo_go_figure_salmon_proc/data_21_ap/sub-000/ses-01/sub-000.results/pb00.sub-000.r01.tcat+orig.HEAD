@@ -1,0 +1,260 @@
+
+type = string-attribute
+name = HISTORY_NOTE
+count = 250
+'[taylorpa3@cn4365: Mon Mar 10 17:06:03 2025] {AFNI_25.0.07:linux_rocky_8} 3dTcat -prefix sub-000.results/pb00.sub-000.r01.tcat '/data/NIMH_SSCC/p022_dead_salmon/data_00_basic/sub-000/ses-01/func/sub-000_ses-01_task-checkbrd_run-01_bold.nii.gz[3..$]'~
+
+type = string-attribute
+name = TYPESTRING
+count = 15
+'3DIM_HEAD_ANAT~
+
+type = string-attribute
+name = IDCODE_STRING
+count = 27
+'AFN_eWHigt7doElKfDkFtQ4s3Q~
+
+type = string-attribute
+name = IDCODE_DATE
+count = 25
+'Mon Mar 10 17:06:03 2025~
+
+type = integer-attribute
+name = SCENE_DATA
+count = 8
+ 0 2 0 -999 -999
+ -999 -999 -999
+
+type = string-attribute
+name = LABEL_1
+count = 5
+'zyxt~
+
+type = string-attribute
+name = LABEL_2
+count = 5
+'zyxt~
+
+type = string-attribute
+name = DATASET_NAME
+count = 5
+'zyxt~
+
+type = integer-attribute
+name = ORIENT_SPECIFIC
+count = 3
+ 0 2 4
+
+type  = float-attribute
+name  = ORIGIN
+count = 3
+        -67.177         54.475       -46.8289
+
+type  = float-attribute
+name  = DELTA
+count = 3
+              2             -2            2.5
+
+type  = float-attribute
+name  = IJK_TO_DICOM
+count = 12
+              2              0              0        -67.177              0
+             -2              0         54.475              0              0
+            2.5       -46.8289
+
+type  = float-attribute
+name  = IJK_TO_DICOM_REAL
+count = 12
+              2              0              0        -67.177              0
+             -2              0         54.475              0              0
+            2.5       -46.8289
+
+type  = float-attribute
+name  = BRICK_STATS
+count = 334
+              0           3600              0           3481              0
+           3539              0           3502              0           3517
+              0           3584              0           3545              0
+           3552              0           3532              0           3617
+              0           3543              0           3603              0
+           3530              0           3521              0           3538
+              0           3529              0           3578              0
+           3583              0           3582              0           3591
+              0           3566              0           3544              0
+           3531              0           3501              0           3504
+              0           3511              0           3520              0
+           3481              0           3516              0           3561
+              0           3554              0           3589              0
+           3534              0           3532              0           3537
+              0           3498              0           3512              0
+           3546              0           3523              0           3584
+              0           3534              0           3482              0
+           3569              0           3551              0           3549
+              0           3492              0           3552              0
+           3553              0           3530              0           3517
+              0           3484              0           3537              0
+           3542              0           3561              0           3545
+              0           3484              0           3547              0
+           3524              0           3565              0           3553
+              0           3536              0           3505              0
+           3539              0           3526              0           3502
+              0           3520              0           3502              0
+           3534              0           3521              0           3520
+              0           3535              0           3505              0
+           3548              0           3610              0           3485
+              0           3521              0           3592              0
+           3564              0           3560              0           3597
+              0           3532              0           3478              0
+           3535              0           3538              0           3515
+              0           3534              0           3562              0
+           3554              0           3569              0           3568
+              0           3546              0           3454              0
+           3509              0           3481              0           3489
+              0           3552              0           3574              0
+           3540              0           3567              0           3552
+              0           3527              0           3534              0
+           3527              0           3520              0           3537
+              0           3521              0           3537              0
+           3518              0           3483              0           3520
+              0           3476              0           3495              0
+           3553              0           3477              0           3525
+              0           3537              0           3487              0
+           3478              0           3563              0           3567
+              0           3481              0           3515              0
+           3541              0           3528              0           3448
+              0           3485              0           3503              0
+           3465              0           3508              0           3584
+              0           3540              0           3503              0
+           3504              0           3500              0           3620
+              0           3578              0           3542              0
+           3514              0           3541              0           3487
+              0           3581              0           3538              0
+           3463              0           3519              0           3520
+              0           3488              0           3489              0
+           3443              0           3502              0           3528
+              0           3571              0           3509              0
+           3493              0           3485              0           3510
+              0           3468              0           3466              0
+           3460              0           3537              0           3483
+              0           3513              0           3531              0
+           3458              0           3496              0           3491
+              0           3460              0           3434
+
+type = integer-attribute
+name = TAXIS_NUMS
+count = 8
+ 167 0 77002 -999 -999
+ -999 -999 -999
+
+type  = float-attribute
+name  = TAXIS_FLOATS
+count = 8
+              0              2              0              0              0
+        -999999        -999999        -999999
+
+type = integer-attribute
+name = DATASET_RANK
+count = 8
+ 3 167 0 0 0
+ 0 0 0
+
+type = integer-attribute
+name = DATASET_DIMENSIONS
+count = 5
+ 70 70 37 0 0
+
+type = integer-attribute
+name = BRICK_TYPES
+count = 167
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1 1 1 1
+ 1 1
+
+type  = float-attribute
+name  = BRICK_FLOAT_FACS
+count = 167
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0              0              0              0
+              0              0
+
+type = string-attribute
+name = BRICK_LABS
+count = 3570
+'sub-000_ses-01_t[3]~sub-000_ses-01_t[4]~sub-000_ses-01_t[5]~sub-000_ses-01_t[6]~sub-000_ses-01_t[7]~sub-000_ses-01_t[8]~sub-000_ses-01_t[9]~sub-000_ses-01_t[10]~sub-000_ses-01_t[11]~sub-000_ses-01_t[12]~sub-000_ses-01_t[13]~sub-000_ses-01_t[14]~sub-000_ses-01_t[15]~sub-000_ses-01_t[16]~sub-000_ses-01_t[17]~sub-000_ses-01_t[18]~sub-000_ses-01_t[19]~sub-000_ses-01_t[20]~sub-000_ses-01_t[21]~sub-000_ses-01_t[22]~sub-000_ses-01_t[23]~sub-000_ses-01_t[24]~sub-000_ses-01_t[25]~sub-000_ses-01_t[26]~sub-000_ses-01_t[27]~sub-000_ses-01_t[28]~sub-000_ses-01_t[29]~sub-000_ses-01_t[30]~sub-000_ses-01_t[31]~sub-000_ses-01_t[32]~sub-000_ses-01_t[33]~sub-000_ses-01_t[34]~sub-000_ses-01_t[35]~sub-000_ses-01_t[36]~sub-000_ses-01_t[37]~sub-000_ses-01_t[38]~sub-000_ses-01_t[39]~sub-000_ses-01_t[40]~sub-000_ses-01_t[41]~sub-000_ses-01_t[42]~sub-000_ses-01_t[43]~sub-000_ses-01_t[44]~sub-000_ses-01_t[45]~sub-000_ses-01_t[46]~sub-000_ses-01_t[47]~sub-000_ses-01_t[48]~sub-000_ses-01_t[49]~sub-000_ses-01_t[50]~sub-000_ses-01_t[51]~sub-000_ses-01_t[52]~sub-000_ses-01_t[53]~sub-000_ses-01_t[54]~sub-000_ses-01_t[55]~sub-000_ses-01_t[56]~sub-000_ses-01_t[57]~sub-000_ses-01_t[58]~sub-000_ses-01_t[59]~sub-000_ses-01_t[60]~sub-000_ses-01_t[61]~sub-000_ses-01_t[62]~sub-000_ses-01_t[63]~sub-000_ses-01_t[64]~sub-000_ses-01_t[65]~sub-000_ses-01_t[66]~sub-000_ses-01_t[67]~sub-000_ses-01_t[68]~sub-000_ses-01_t[69]~sub-000_ses-01_t[70]~sub-000_ses-01_t[71]~sub-000_ses-01_t[72]~sub-000_ses-01_t[73]~sub-000_ses-01_t[74]~sub-000_ses-01_t[75]~sub-000_ses-01_t[76]~sub-000_ses-01_t[77]~sub-000_ses-01_t[78]~sub-000_ses-01_t[79]~sub-000_ses-01_t[80]~sub-000_ses-01_t[81]~sub-000_ses-01_t[82]~sub-000_ses-01_t[83]~sub-000_ses-01_t[84]~sub-000_ses-01_t[85]~sub-000_ses-01_t[86]~sub-000_ses-01_t[87]~sub-000_ses-01_t[88]~sub-000_ses-01_t[89]~sub-000_ses-01_t[90]~sub-000_ses-01_t[91]~sub-000_ses-01_t[92]~sub-000_ses-01_t[93]~sub-000_ses-01_t[94]~sub-000_ses-01_t[95]~sub-000_ses-01_t[96]~sub-000_ses-01_t[97]~sub-000_ses-01_t[98]~sub-000_ses-01_t[99]~sub-000_ses-01_t[100]~sub-000_ses-01_t[101]~sub-000_ses-01_t[102]~sub-000_ses-01_t[103]~sub-000_ses-01_t[104]~sub-000_ses-01_t[105]~sub-000_ses-01_t[106]~sub-000_ses-01_t[107]~sub-000_ses-01_t[108]~sub-000_ses-01_t[109]~sub-000_ses-01_t[110]~sub-000_ses-01_t[111]~sub-000_ses-01_t[112]~sub-000_ses-01_t[113]~sub-000_ses-01_t[114]~sub-000_ses-01_t[115]~sub-000_ses-01_t[116]~sub-000_ses-01_t[117]~sub-000_ses-01_t[118]~sub-000_ses-01_t[119]~sub-000_ses-01_t[120]~sub-000_ses-01_t[121]~sub-000_ses-01_t[122]~sub-000_ses-01_t[123]~sub-000_ses-01_t[124]~sub-000_ses-01_t[125]~sub-000_ses-01_t[126]~sub-000_ses-01_t[127]~sub-000_ses-01_t[128]~sub-000_ses-01_t[129]~sub-000_ses-01_t[130]~sub-000_ses-01_t[131]~sub-000_ses-01_t[132]~sub-000_ses-01_t[133]~sub-000_ses-01_t[134]~sub-000_ses-01_t[135]~sub-000_ses-01_t[136]~sub-000_ses-01_t[137]~sub-000_ses-01_t[138]~sub-000_ses-01_t[139]~sub-000_ses-01_t[140]~sub-000_ses-01_t[141]~sub-000_ses-01_t[142]~sub-000_ses-01_t[143]~sub-000_ses-01_t[144]~sub-000_ses-01_t[145]~sub-000_ses-01_t[146]~sub-000_ses-01_t[147]~sub-000_ses-01_t[148]~sub-000_ses-01_t[149]~sub-000_ses-01_t[150]~sub-000_ses-01_t[151]~sub-000_ses-01_t[152]~sub-000_ses-01_t[153]~sub-000_ses-01_t[154]~sub-000_ses-01_t[155]~sub-000_ses-01_t[156]~sub-000_ses-01_t[157]~sub-000_ses-01_t[158]~sub-000_ses-01_t[159]~sub-000_ses-01_t[160]~sub-000_ses-01_t[161]~sub-000_ses-01_t[162]~sub-000_ses-01_t[163]~sub-000_ses-01_t[164]~sub-000_ses-01_t[165]~sub-000_ses-01_t[166]~sub-000_ses-01_t[167]~sub-000_ses-01_t[168]~sub-000_ses-01_t[169]~
+
+type = string-attribute
+name = TEMPLATE_SPACE
+count = 5
+'ORIG~
+
+type = integer-attribute
+name = INT_CMAP
+count = 1
+ 0
+
+type = string-attribute
+name = BYTEORDER_STRING
+count = 10
+'LSB_FIRST~

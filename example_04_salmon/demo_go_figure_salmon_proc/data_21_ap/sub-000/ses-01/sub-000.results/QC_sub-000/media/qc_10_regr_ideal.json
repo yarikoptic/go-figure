@@ -1,0 +1,9 @@
+{
+    "itemtype": "1D",
+    "itemid": "ideal",
+    "blockid": "regr",
+    "blockid_hov": "regressors",
+    "title": "Check regressors, DFs and residuals",
+    "text": "Sum of regressors of interest (in sum_ideal.1D) and combined censoring",
+    "subtext": "censored vols (0%): "
+}

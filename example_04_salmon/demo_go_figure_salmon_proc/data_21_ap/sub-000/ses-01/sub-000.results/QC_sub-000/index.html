@@ -1,0 +1,2660 @@
+<html>
+
+<!-- START of pre-QC-block part -->
+<head>
+<title>sub-000</title>
+<link rel="stylesheet" type="text/css" href="extra_info/styles.css" />
+<link rel="icon" type="icon.svg" href="extra_info/apqc_logo_main.svg"> 
+<script type="text/javascript">
+
+// global vars
+var allBtn1, allTd1;             // selection/location IDs
+var allhr_sec = "";              // more IDs
+var topi, previ;                 // keeps our current/last location
+//var subj_id  = "sub-000";            // subject's ID
+var jsonfile = "apqc_sub-000.json";  // json file: apqc_SUBJ.json
+var json_ssrev = "extra_info/out.ss_review.sub-000.json"; // ss_review JSON
+var qcjson = {};                 // I/O json of QC button responses
+var nb_offset = 66-1;            // navbar height: needed for scroll/jump
+
+// properties of QC buttons that get toggled through
+const bkgds   = [ "#fff" , "#67a9cf", "#d7191c"  ];
+const valeurs = [ "?"    , "+"      , "X"        ];
+const tcols   = [ "#777" , "#FFF"   , "#000"     ];
+
+// check where server is running (to alert users before filling in buttons)
+let url       = window.location.href
+let origin    = window.location.origin
+let is_served = url.startsWith('file:') ? false : true
+
+console.log('URL', url)
+console.log('is_served', is_served)
+
+/* For using is_served to set saving button color:
+    First, get the root element, which has color
+    defined
+*/
+var r = document.querySelector(':root');
+
+/* ... then, this function will help set colors
+*/
+function colorizeSavingButton(val) {
+  if (val) {
+    r.style.setProperty('--SavingTextCol', '#009933');
+    r.style.setProperty('--SavingBkgdCol', '#000'); //'#fff');
+    r.style.setProperty('--SavingTextDec', 'none');
+
+    r.style.setProperty('--SavingTextColB6', '#000');
+    r.style.setProperty('--SavingBkgdColB6', '#029a64');
+  } else {
+    r.style.setProperty('--SavingTextCol', '#9f9f9f');
+    r.style.setProperty('--SavingBkgdCol', '#000'); //'#fff');
+    r.style.setProperty('--SavingTextDec', 'line-through');
+
+    r.style.setProperty('--SavingTextColB6', '#016843');
+    r.style.setProperty('--SavingBkgdColB6', '#016843');
+  }
+}
+
+/* ... finally, use and colorize */
+colorizeSavingButton(is_served);
+
+
+/* 
+   function for scrolling/jumping all APQC HTML instances that were
+   opened at the same time: jump to same location.
+   This puts the new value into localStorage...
+*/
+function jumpAllOpenApqcToID(id) {
+  const jumpID = id;
+
+  /* move within this page */
+  let el = document.getElementById(id);
+  el.scrollIntoView({ behavior: 'smooth' }); 
+  /*el.scrollIntoView({ behavior: 'instant' })*/
+
+  /* and update local storage so other pages move */
+  localStorage.setItem('jumpID', id);
+}
+
+/* 
+   ... and this listens to changes in local storage (coming from
+   other pages), to react and jump to the appropriate location
+*/
+window.addEventListener('storage', (event) => {
+  /* if jumpID has changed, then jump to that new location */
+  if (event.key === 'jumpID') {
+    let el = document.getElementById(event.newValue);
+    el.scrollIntoView({ behavior: 'instant' });
+  }
+});
+
+
+/*
+   Do both checking of server status and resetting of the is_served
+   var if it is no longer running.  Also, ensure button colors are 
+   up-to-date.
+*/
+function checkServerStatus() {
+  return fetch(url, { method: 'GET' })
+    .then(response => {
+      if (is_served && response.ok) { 
+        // Server is alive
+        return true;
+      } else {
+        // Server is not alive
+        return false;
+      }
+    })
+    .catch(error => {
+      // Server is not alive or there was an error
+      console.log('+* Warning: the server is not serving: ' + error);
+      return false;
+    });
+}
+
+async function updateServerStatus() {
+  let isAlive = await checkServerStatus()
+      if (isAlive) {
+        console.log("Server is up");
+      } else {
+        is_served = false;
+        colorizeSavingButton(is_served);
+      }
+   console.log("Report on update. Server status is: "+is_served);
+}
+
+/* Different than checking server status; this returns OK if: 1) the
+   page was started with a server running and the server is still
+   running now; 2) the page was started without a server at all. 
+   
+   This is useful for the help button to work, for example.
+*/
+function checkPageStatus() {
+  return fetch(url, { method: 'GET' })
+    .then(response => {
+      if (response.ok) { 
+        // started as non-server, or started with server AND still okay
+        return true;
+      } else {
+        // started with server AND server not okay
+        return false;
+      }
+    })
+    .catch(error => {
+      // Server is not alive or there was an error
+      console.log('+* Warning: the page has some issue: ' + error);
+      return false;
+    });
+}
+
+/* for the NV button, toggle NiiVue instance on/off by id */
+async function toggle_niivue(is_served, id) {
+  await updateServerStatus();
+  if ( is_served ) {
+    let element = document.getElementById(id);
+    let current_disp = element.style.display; // current disp value
+    // toggle between 'block' and 'none'
+    element.style.display = current_disp === '' ? 'block' : '';
+    if (element.style.display == ''){
+      // remove all children from the element
+      while (element.firstChild) {
+          element.removeChild(element.firstChild);
+      }
+    } else {
+      // add an iframe to the element. The iframe will load its 
+      // own niivue js and images
+      let html_name = './' + id + '.html';
+      let nv_iframe = document.createElement('iframe');
+      nv_iframe.src = html_name;
+      nv_iframe.frameBorder = '0';
+      nv_iframe.style.display = 'block';
+      nv_iframe.style.width = '100%';
+      nv_iframe.style.height = 'auto';
+      nv_iframe.style.aspectRatio = '4.5/1'; // accommodate hide olay btn
+      element.appendChild(nv_iframe);
+    }
+  }
+}
+
+
+/* show/hide olay in NV (for align checks)
+    obj : NV object ID
+    bid : button ID in that object's NV canvas
+*/
+function niivue_ShowHideOlay(obj, bid) {
+  let element = document.getElementById(bid);
+  if (obj.volumes[1].opacity) {
+    obj.setOpacity(1, 0);
+    element.innerText = "View Olay";
+  } else {
+    obj.setOpacity(1, 1);
+    element.innerText = "Hide Olay";
+  }
+}
+
+
+//window.onload = function() {
+async function RunAtStart() {
+  // initialize arrays and location
+  initializeParams();
+
+  // read in JSON, if we have server running
+  if ( is_served ) {
+    qcjson = await loadJSON(jsonfile)
+    console.log(qcjson)
+    CheckJsonfileMatchesQcbuttons();
+    ApplyJsonfileToQcbuttons();
+  }
+};
+
+
+// used for string formatting numbers (C Rorden), below
+function flt2str0(flt, ndec = 0) {
+    //retain trailing zero
+    return flt.toFixed(ndec); //return string
+}
+
+/* more string formatting numbers, below ... WITH directionality here,
+   assuming the coords are what AFNI calls LPI (and what some other
+   software call RAS); basically, L/P/I are neg coords, and R/A/S are
+   positive.  
+*/
+function flt2str0_dir(flt, ndec = 0, dir = '' ) {
+    //retain trailing zero
+    if ( dir == '' ) {
+      return flt.toFixed(ndec); //return string
+    } else if ( dir == 'RL' ) {
+      let aflt = Math.abs(flt);
+      let lab  = (flt < 0 ) ? 'L' : 'R';
+      return aflt.toFixed(ndec) + lab;
+    } else if ( dir == 'AP' ) {
+      let aflt = Math.abs(flt);
+      let lab  = (flt < 0 ) ? 'P' : 'A';
+      return aflt.toFixed(ndec) + lab;
+    } else if ( dir == 'IS' ) {
+      let aflt = Math.abs(flt);
+      let lab  = (flt < 0 ) ? 'I' : 'S';
+      return aflt.toFixed(ndec) + lab;
+    } else {
+      return ''; 
+    }
+}
+
+
+/*
+  OFF AT THE MOMENT, but a guard for reloading page
+*/
+window.onbeforeunload = function(event)
+{
+  doQuit()
+  let seriouslyQuit = confirm()
+  if (seriouslyQuit) {
+    doQuit()
+  }
+  return seriouslyQuit;
+};
+
+/* This function gets run when page loads ("onload").
+   The classes matter for identifying properties that certain buttons
+   or other objects have:
+     btn1   : QC rating buttons
+     td1    : QC comment buttons
+     hr_sec : locations for where to jump for each QC block ID
+*/
+function initializeParams() {
+    allBtn1   = document.getElementsByClassName("btn1");   // btn1_vepi, btn1_*
+    allTd1    = document.getElementsByClassName("td1");    // td1_vepi,  td1_*
+    allhr_sec = document.getElementsByClassName("hr_sec"); // hr_vepi,   hr_*
+
+    topi      = findTopSectionIdx();      // idx of current loc
+    previ     = topi;                     // init "previous" idx
+    setTd1Border(topi, "#ffea00");        // show location
+}
+
+/*
+  Read in JSON file.  Importantly, the xobjs.open(...) func NEEDS to
+  have the 'false' set to read synchronously, which is necessary for
+  the JSON to load fully before use---slower, but this is a small file.
+*/
+async function loadJSON(ifile) {
+    let json = await fetch(ifile)
+    .then(response => response.json())
+    return json
+}
+
+async function postJSON(data = {}, quit=false) {
+    let route = ''
+    if (quit){
+      route = 'quit'
+    } else {
+      route = 'save'
+    }
+    let url = origin + '/' + route
+
+    // Default options are marked with *
+    const response = await fetch(url, {
+        
+    /* from: *GET, POST, PUT, DELETE, etc. */
+    method: quit ? 'GET' : 'POST',
+
+    /* from: *default, no-cache, reload, force-cache,
+    only-if-cached */
+    cache: 'no-cache', 
+
+    headers: {
+      'Content-Type': 'application/json'
+    },
+
+    /* from: no-referrer, *no-referrer-when-downgrade, origin,
+    origin-when-cross-origin, same-origin, strict-origin,
+    strict-origin-when-cross-origin, unsafe-url */
+    referrerPolicy: 'no-referrer', 
+
+    /* body data type must match "Content-Type" header */
+    body: quit ? null : JSON.stringify(data) 
+  });
+
+  // parse JSON response into native JavaScript objects
+  qcjson = await response.json()
+  console.log(qcjson)
+  return qcjson; 
+}
+
+/* used to be able to run pre-built scripts in the AP results 
+   directory.  These are fired up when the AV button by an image
+   is clicked, via doRunAV(...).
+*/
+async function postJSON_AV(data = {}) {
+    let url = origin + '/' + 'run_av'
+
+    // Default options are marked with *
+    const response = await fetch(url, {
+        
+    /* from: *GET, POST, PUT, DELETE, etc. */
+    method: 'POST',
+
+    /* from: *default, no-cache, reload, force-cache,
+    only-if-cached */
+    cache: 'no-cache', 
+
+    headers: {
+      'Content-Type': 'application/json'
+    },
+
+    /* from: no-referrer, *no-referrer-when-downgrade, origin,
+    origin-when-cross-origin, same-origin, strict-origin,
+    strict-origin-when-cross-origin, unsafe-url */
+    referrerPolicy: 'no-referrer', 
+
+    /* body data type must match "Content-Type" header */
+    body: JSON.stringify(data) 
+  });
+}
+
+/*
+  Both the QC element names AND their order need to match
+*/
+function CheckJsonfileMatchesQcbuttons() {
+    var Nele = qcjson.length;
+
+    for( var i=1; i<Nele; i++ ) {
+        var ele = qcjson[i][0];
+
+        var jj = i - 1;  // offset because of col heading in JSON
+        var bname = new String(allBtn1[jj].id); 
+        var bpost = bname.slice(5);  // skip the 'btn1_' part of button ID
+
+        if ( bpost != ele ) {
+             window.alert("**Error: postfix on button ID " + bname + " does not match with JSON entry " + ele); 
+             throw "DONE";
+        }
+    }
+}
+
+/* This function gets run when page loads ("onload").
+
+   Because order matches (offset by 1), we can just apply directly
+   with the counting index, based on the allBtn1 list.
+*/
+function ApplyJsonfileToQcbuttons() {
+    var Nele = qcjson.length;
+
+    for( var i=1; i<Nele; i++ ) {
+        var jj = i - 1;  // offset because of col heading in JSON
+        var bid = new String(allBtn1[jj].id);
+
+        // Set the comments first, because the button presentation 
+        // of rating depends on whether that has been set
+        sendCommentToButtonAndForm(qcjson[i][2], bid);
+        sendRatingToButton(qcjson[i][1], bid);
+    }
+}
+
+/*    
+   This function gets run when page loads ("onload").  'ss' is the
+   JSON rating, and 'bid' is the button ID in AllBtn1.
+*/
+function sendRatingToButton(ss, bid) {
+    if ( ss == "good" ) {
+       setThisButtonRating(bid, 1);
+    } else if ( ss == "bad" ) {
+       setThisButtonRating(bid, 2);
+    } else if ( ss == "other" ) {
+       setThisButtonRating(bid, 0);
+    } else if ( ss == "null" || ss == "" ) {
+       setThisButtonRating(bid, -1);
+    } else {
+      window.alert("**Error: unallowed rating in JSON:" + ss);
+      throw "DONE";
+    }
+}
+
+/*
+   When the JSON is read in, get comments and give any text to both
+   the btn1 and associated comment form textarea
+*/
+function sendCommentToButtonAndForm(comm, bid) {
+    thisButtonGetsAComment(bid, comm);
+
+    var bname = new String(bid); // basename
+    // skip the 'btn1_' part of button ID
+    var cid   = 'comm_' + bname.slice(5);
+
+    // because of how "null" is read in; this just matters in form
+    if ( comm == "null" ) {
+        var comm = "";
+    }
+    thisFormTextAreaGetsAComment(cid, comm);
+}
+
+/*
+  Checks/rechecks whenever change in page location occurs.
+  [PT: Mar 11, 2024] check allhr_sec, for when using '-jump_to' opt in 
+                     open_apqc.py
+*/
+window.addEventListener("scroll", function(event) {
+    if (allhr_sec == "") {
+       initializeParams();
+    }
+    var newi = findTopSectionIdx();
+
+    if ( newi != topi ) {
+        setTd1Border(newi, "#ffea00"); 
+        setTd1Border(topi, "inherit");
+        previ = topi;
+        topi  = newi;
+    }
+}, false);
+
+/*
+  Go through (short) list from top, and first one that has pos
+  coor, is the one at top
+*/
+function findTopSectionIdx() {
+    for( var i=0; i<allhr_sec.length; i++ ) {
+        var bid = allhr_sec[i].id; 
+        var bbox = document.getElementById(bid).getBoundingClientRect();
+        if ( bbox.top - nb_offset > 1 ) {
+            break;
+        }
+    }
+    return i-1;
+}
+
+function setTd1Border(ii, bkgdcol) {
+    var newtid = allTd1[ii].id;
+    document.getElementById(newtid).style.background = bkgdcol;
+}
+
+/*
+  A click on the QC buttons will scroll through the color values;
+  ctrl+click on the QC buttons will toggle between the comment
+  form being open or closed (saving what is in form when closing).
+  [PT: July 2, 2023] also recognize meta+click (= command+click on Mac)
+  like a ctrl+click, because of Mac webpage behavior---thanks, DRG.
+*/
+async function btn1Clicked(event, button) {
+  await updateServerStatus();
+  if ( is_served ) {  
+    if (event.metaKey) {
+       btn1ClickedWithCtrl(event, button);
+    }  else if (event.ctrlKey) {
+       btn1ClickedWithCtrl(event, button);
+    }  else {
+       changeColor(button); //alert("The CTRL key was NOT pressed!");
+    }
+  }
+}
+
+function btn1ClickedWithCtrl(event, button) {
+    // get the form ID from button ID
+    var bname = new String(button.id);
+    var bpost = bname.slice(5); // skip the 'btn1_' part of button ID
+    var cFormID = 'cform_' + bpost;
+    // if closed, this opens it; otherwise, it closes it
+    if ( document.getElementById(cFormID).style.display == false ||
+         document.getElementById(cFormID).style.display == "none" ) {
+         openCommentForm(cFormID, button.id); 
+    } else {
+         keepFromCommentFormViaBtn1(button.id, cFormID);
+    }
+}
+
+/*
+  Toggle individual button colors/etc.
+*/
+function changeColor(button) {
+  newidx = Number(button.dataset.idx || 0);     // idx=0 on first click
+  newidx = (newidx + 1) % bkgds.length;         // calc new idx, mod Ncol
+  button.dataset.idx       = newidx;            // store new idx in ele
+  button.style.color       = tcols[newidx];     // set color
+  button.style.background  = bkgds[newidx];     // set bkgd
+  button.style.borderColor = bkgds[newidx];     // set bkgd
+  button.textContent       = valeurs[newidx];
+  checkIfButtonCommented( button );             // set text
+  doSaveAllInfo();
+}
+
+function checkIfButtonCommented( button ) {
+    var value = button.textContent;
+    var bcomm = button.dataset.txtcomm;
+    var VAL_HAS_QUOTE = value.includes(`"`);
+
+    // if no comment, make sure there is no
+    if ( ( bcomm == "" || bcomm == "null" ) ) {
+       if ( VAL_HAS_QUOTE ) {
+         var newval = value.replace(/"/g, "");
+         button.textContent = newval;
+       }
+    } else {
+       if ( !VAL_HAS_QUOTE ) {
+          button.textContent = `"` + value + `"`;
+       }
+    }
+}
+
+/*
+  two arguments: 
+  + the button ID 'bid' from an element of AllBt1n, 
+  + the 'idx' which picks out valeurs[idx] etc. properties.
+*/
+function setThisButtonRating(bid, idx) {
+    // normal values
+    if ( idx >= 0 ) {
+      document.getElementById(bid).textContent       = valeurs[idx];
+      document.getElementById(bid).style.background  = bkgds[idx];
+      document.getElementById(bid).style.borderColor = bkgds[idx];
+      document.getElementById(bid).style.color       = tcols[idx];
+      document.getElementById(bid).dataset.idx       = idx;
+      checkIfButtonCommented( document.getElementById(bid) );
+    
+    } else {
+      // the reset, for "null" JSON
+      document.getElementById(bid).textContent       = "";
+      document.getElementById(bid).style.background  = '';  // reset to CSS
+      document.getElementById(bid).style.borderColor = '';  // reset to CSS
+      document.getElementById(bid).style.color       = '';  // reset to CSS
+      document.getElementById(bid).dataset.idx       = 0;   // null
+    }
+}
+
+function isBtn1InNullState( bid ) {
+    var tc = document.getElementById(bid).textContent;
+    if ( tc == "" ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/*
+  two arguments: 
+  + the button ID 'bid' from an element of AllBt1n,
+  + the 'comment' that gets added/overwritten (in the newly created
+  element, txtcomm).  
+  Basically used to put the form comments into the button fields, and
+  then later into jsons.
+*/
+function thisButtonGetsAComment(bid, comm) {
+    document.getElementById(bid).dataset.txtcomm = comm;
+
+    // and don't allow a null state anymore if it has a comment:
+    // update it to "other"/"?"
+    if ( comm == "" || comm == "null" || comm === null ) {
+    } else {
+       if ( isBtn1InNullState(bid) ) {
+           setThisButtonRating(bid, 0);
+       }
+    }
+
+    // and reset quotes, if necessary.
+    //window.alert(bid);
+    checkIfButtonCommented( document.getElementById(bid) );
+}
+
+/*
+  "ALL OTHER" fill button, here to set every btn1-button value to
+  "+" or "x", depending on input arg 'ii' (index in list)
+*/
+async function allYourBaseAreBelongToUs(ii) { 
+  await updateServerStatus();
+  if ( is_served ) {
+    for( var i=0; i<allBtn1.length; i++ ) { 
+      var bid = allBtn1[i].id; 
+      var ival = document.getElementById(bid).textContent; 
+      if ( ival == "" ) { 
+        setThisButtonRating(bid, ii); 
+      }
+    } 
+    doSaveAllInfo();
+  }
+}
+
+/*
+  "ALL-ALL" fill button: regardless of initial state set every
+  btn1-button value to "+" or "x", depending on input arg 'ii'
+  (index in list); that is, this overruns earlier button values
+*/
+async function reallyAllYourBaseAreBelongToUs(ii) { 
+  await updateServerStatus();
+  if ( is_served ) {
+    for( var i=0; i<allBtn1.length; i++ ) { 
+      var bid = allBtn1[i].id; 
+      var ival = document.getElementById(bid).textContent; 
+      setThisButtonRating(bid, ii);
+      if ( ii < 0 ) {
+         sendCommentToButtonAndForm("", bid);
+      }
+    }
+    doSaveAllInfo();
+  }
+} 
+
+/*
+  Get position coordinates of an object, knowing its ID
+*/
+function getBoundingRect(iid) {
+    var bbox = document.getElementById(iid).getBoundingClientRect();
+    return bbox;
+}
+
+/*
+  Use this to place the thing: the height comes from the height of the
+  menu bar, and the L-R positioning comes from the QC button itself.
+*/
+function openCommentForm(cfID, bid) {
+    document.getElementById(cfID).style.display = "block";
+    var bbox = getBoundingRect(bid);
+    document.getElementById(cfID).style.left  = bbox.left; 
+}
+
+/*
+  Just close the form button when done (mainly for ctrl+click)
+*/
+function closeCommentForm(cfID) {
+    document.getElementById(cfID).style.display = "none";
+}
+
+/*
+  Close *and* remove value (esc key, or clear+close button)
+*/
+function clearCommentForm(cid, cfID) {
+    document.getElementById(cid).value = "";
+
+    // get the btn1 ID from comm ID
+    var bname = new String(cid); // basename
+    // skip the 'comm_' part of button ID
+    var bid   = "btn1_" + bname.slice(5);
+
+    thisButtonGetsAComment(bid, null);
+
+    closeCommentForm(cfID);
+    doSaveAllInfo();
+}
+/*
+  ... do the above *and* clear rating
+*/
+function clearCommentFormAndRating(cid, cfID) {
+    document.getElementById(cid).value = "";
+
+    // get the btn1 ID from comm ID
+    var bname = new String(cid); // basename
+    // skip the 'comm_' part of button ID
+    var bid   = "btn1_" + bname.slice(5);
+
+    thisButtonGetsAComment(bid, null);
+    setThisButtonRating(bid, -1);
+
+    closeCommentForm(cfID);
+    doSaveAllInfo();
+}
+
+
+/*
+   needed for when JSON file is read in, to give values from that to
+   the text area field (as well as bt1n)
+*/
+function thisFormTextAreaGetsAComment(cid, comm) {
+    document.getElementById(cid).value = comm;
+}
+
+/*
+  "Saving" here means taking the comment (cid) and associating it with
+  a button (bid), while also closing the comment form (cfID).  (enter
+  key, or keep+close button)
+*/
+function keepFromCommentForm(cid, cfID) {
+
+    // user's text
+    var commtext = document.getElementById(cid).value;
+
+    // get the btn1 ID from comm ID
+    var bname = new String(cid); // basename
+    // skip the 'comm_' part of button ID
+    var bid   = "btn1_" + bname.slice(5);
+
+    thisButtonGetsAComment(bid, commtext);
+    closeCommentForm(cfID);
+    doSaveAllInfo();
+}
+
+/*
+  Same as keepFromCommentForm(...), but used when user is
+  ctrl+clicking on btn1 to close comment.
+*/
+function keepFromCommentFormViaBtn1(bid, cfID) {
+
+    // get the btn1 ID from comm ID
+    var bname = new String(bid); // basename
+    // skip the 'comm_' part of button ID
+    var cid   = 'comm_' + bname.slice(5);
+
+    // user's text
+    var commtext = document.getElementById(cid).value;
+
+    thisButtonGetsAComment(bid, commtext);
+    closeCommentForm(cfID);
+    doSaveAllInfo();
+}
+
+/*
+  THIS is now how we move on the page, so that there is no need to
+  jump into the page, and hence tabbing through buttons is allowed.
+*/
+function moveToDiv( hr_sec ) {
+    var sid = new String(hr_sec.id)
+    var rect = getBoundingRect(sid);
+
+    var scrtop =  this.scrollY;
+    var newloc = rect.top + scrtop - nb_offset;
+    window.scrollTo(0, newloc);
+
+    //window.alert("earlier: " + rect.top + ", and now: " + this.scrollY);
+}
+
+/*
+  Submit values by element and col names
+*/
+function saveJsonValuesByNames(elename, colname, VAL) {
+    cc = findCol(colname);
+    rr = findQceleRow(elename);
+
+    qcjson[rr][cc] = VAL;
+}
+
+/* 
+  Submit values by row and col nums
+*/
+function saveJsonValuesByNums(rr, cc, VAL) {
+    Ncol = qcjson[0].length;
+    if ( cc >= Ncol ) {
+      window.alert("**Error: Column [" + cc + "] not in JSON table!");
+      throw "DONE";
+    }
+
+    var Nrow = qcjson.length;
+    if ( i >= Nrow ) {
+      window.alert("**Error: QC element [" + rr + "] not in JSON table!"); 
+      throw "DONE!";
+    }
+
+    qcjson[rr][cc] = VAL;
+}
+
+// find row index of QC element in JSON table
+function findQceleRow(elename) {
+    var Nrow = qcjson.length;
+    for( var i=1 ; i<Nrow ; i++ ) {
+       if ( elename == qcjson[i][0] ) {
+         break;
+       }
+    }
+
+    if ( i >= Nrow ) {
+      window.alert("**Error: QC element " + elename + " not in JSON table!"); 
+      throw "DONE";
+    }
+
+    return i;
+}
+
+// find col index of item in JSON table
+function findCol(colname) {
+    Ncol = qcjson[0].length;
+    for( var cc=1 ; cc<Ncol ; cc++ ) {
+       if ( colname == qcjson[0][cc] ) {
+         break;
+       }
+    }
+
+    if ( cc >= Ncol ) {
+       window.alert("**Error: Column " + colname + " not in JSON table!"); 
+       throw "DONE";
+    }
+
+    return cc;
+}
+
+// the function that saves QC button ratings and comments to the *.json
+function doSaveAllInfo() {
+    updateLocalJson();
+
+    // prepare to output all info needed for server
+    pathParts = window.location.pathname.split('/')
+    qcPath = pathParts.slice(1,-1)
+    // rem is 'remainder', because this is the (full) remainder
+    // of the path to the APQC JSON file from the end of the 
+    // common abs path used to start the server
+    remJsonFilename = qcPath.join('/') + '/' + jsonfile
+    remJson_ssrev   = qcPath.join('/') + '/' + json_ssrev
+
+    dataToPost = {
+        'remJson_ssrev': remJson_ssrev,
+        'remJsonFilename': remJsonFilename,
+        'JsonFileContents': qcjson,
+    }
+
+    postJSON(dataToPost);
+} 
+
+/* Function that is called by AV button to run AFNI script
+   the script should be the name of the script. It basically 
+   provides the script name and the 'remainder' (or 'tail') part
+   of a filepath that is used in open_apqc.py to run the script.
+*/
+async function doRunAV(script) {
+  await updateServerStatus();
+  if ( is_served ) {  
+    // prepare to output all info needed for server
+    pathParts = window.location.pathname.split('/')
+    qcPath = pathParts.slice(1,-1)
+
+    // rem is 'remainder', because this is the (full) remainder
+    // of the path to the APQC JSON file from the end of the 
+    // common abs path used to start the server
+    remJsonFilename = qcPath.join('/') + '/' + jsonfile
+
+    dataToPost = {
+        'remJsonFilename': remJsonFilename,
+        'script': script,
+    }
+
+    postJSON_AV(dataToPost);
+  }
+} 
+
+
+// The Quitter
+function doQuit() {
+    updateLocalJson();
+}
+
+
+// The Helper
+async function doShowHelp() {
+  let is_ok = await checkPageStatus();
+  if ( is_ok ) {
+    window.open('help.html', '_blank');
+  } else {
+    await updateServerStatus();
+  }
+} 
+
+// Link to mtedana QC page, if present
+async function doShowMtedana(link) {
+  let is_ok = await checkPageStatus();
+  if ( is_ok ) {
+    window.open(link, '_blank');
+  } else {
+    await updateServerStatus();
+  }
+} 
+
+
+
+function updateLocalJson() {
+    var Nele = qcjson.length;
+    for( var i=1; i<Nele; i++ ) {
+
+        var qcele = qcjson[i][0];
+
+        var jj    = i - 1;  // offset because of col heading in JSON
+        var bid   = new String(allBtn1[jj].id); 
+
+        var rattext = translateBtn1TextToJsonRating(document.getElementById(bid).textContent);
+        saveJsonValuesByNames(qcele, "rating", rattext);
+
+        // save the comment part
+        var commtext = document.getElementById(bid).dataset.txtcomm;
+        saveJsonValuesByNames(qcele, "comment", commtext); 
+    }
+}
+
+function translateBtn1TextToJsonRating( tt ) {
+    if ( tt.includes("+") ) {
+       return "good";
+    } else if ( tt.includes("X") ) {
+       return "bad";
+    } else if ( tt.includes("?") ) {
+       return "other";
+    } else if ( tt == "null" || tt == "" ) {
+       return "null";
+    } else {
+      window.alert("**Error: unallowed text/rating in button:" + tt);
+      throw "DONE";
+    }
+}
+
+</script>
+
+    
+<!-- make dummy navbar, which sits in the background -->
+<div class="navbar">
+  <table style="width: 100%">
+
+    <tr>
+      <td style="width: 100%">
+        <a style="text-align: left"> | </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width: 100%">
+        <button class="button-generic button-LHS btn0" 
+                onclick="">
+        | </button>
+      </td>
+    </tr>
+
+  </table>
+</div> <!-- end of dummy navbar -->
+
+<!-- start of real/foreground navbar (uses z-index to keep on top) -->
+<div class="navbar" style="z-index: 10;">
+
+  <!-- start QC button table for block=HOME -->
+  <table style="float: left">
+
+    <!-- top button for block=HOME -->
+    <tr>
+      <td class="td1" id=td1_HOME>
+        <button class="button-generic button-LHS btn0" id="btn5_HOME" 
+        onmousedown="moveToDiv(hr_HOME)" 
+        title="Top of page for subj:&#10  sub-000" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_HOME); }">
+        TOP&#8679</button>
+      </td>
+    </tr>
+
+     <!-- bot button for block=RATE: -->
+    <tr>
+      <td>
+        <button class="button-generic button-RHS btn3saving" id=td3_RATE:
+                title="Display if QC/rating info is being saved.
+
+Automatic saving is:
++ ON, if the text is green
++ OFF, if the text is gray with red strikethrough
+"   
+              onclick="colorizeSavingButton(is_served)">
+        RATE:</button>
+      </td>
+    </tr>
+
+  <!-- start QC button table for block=vorig -->
+  <table style="float: left">
+
+    <!-- top button for block=vorig -->
+    <tr>
+      <td class="td1" id=td1_vorig>
+        <button class="button-generic button-LHS btn5" id="btn5_vorig" 
+        onmousedown="moveToDiv(hr_vorig)" 
+        title="vols in orig space" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_vorig); }">
+        vorig</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=vorig -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_vorig" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=vorig -->
+<div class="form-popup" id="cform_vorig" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_vorig" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_vorig.id, cform_vorig.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_vorig.id, cform_vorig.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_vorig.id, cform_vorig.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_vorig.id, cform_vorig.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_vorig.id, cform_vorig.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_vorig.id, cform_vorig.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=ve2a -->
+  <table style="float: left">
+
+    <!-- top button for block=ve2a -->
+    <tr>
+      <td class="td1" id=td1_ve2a>
+        <button class="button-generic button-LHS btn5" id="btn5_ve2a" 
+        onmousedown="moveToDiv(hr_ve2a)" 
+        title="vol alignment (EPI-anat)" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_ve2a); }">
+        ve2a</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=ve2a -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_ve2a" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=ve2a -->
+<div class="form-popup" id="cform_ve2a" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_ve2a" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_ve2a.id, cform_ve2a.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_ve2a.id, cform_ve2a.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_ve2a.id, cform_ve2a.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_ve2a.id, cform_ve2a.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_ve2a.id, cform_ve2a.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_ve2a.id, cform_ve2a.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=vstat -->
+  <table style="float: left">
+
+    <!-- top button for block=vstat -->
+    <tr>
+      <td class="td1" id=td1_vstat>
+        <button class="button-generic button-LHS btn5" id="btn5_vstat" 
+        onmousedown="moveToDiv(hr_vstat)" 
+        title="statistics vols" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_vstat); }">
+        vstat</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=vstat -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_vstat" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=vstat -->
+<div class="form-popup" id="cform_vstat" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_vstat" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_vstat.id, cform_vstat.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_vstat.id, cform_vstat.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_vstat.id, cform_vstat.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_vstat.id, cform_vstat.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_vstat.id, cform_vstat.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_vstat.id, cform_vstat.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=mot -->
+  <table style="float: left">
+
+    <!-- top button for block=mot -->
+    <tr>
+      <td class="td1" id=td1_mot>
+        <button class="button-generic button-LHS btn5" id="btn5_mot" 
+        onmousedown="moveToDiv(hr_mot)" 
+        title="motion and outliers" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_mot); }">
+        mot</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=mot -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_mot" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=mot -->
+<div class="form-popup" id="cform_mot" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_mot" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_mot.id, cform_mot.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_mot.id, cform_mot.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_mot.id, cform_mot.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_mot.id, cform_mot.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_mot.id, cform_mot.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_mot.id, cform_mot.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=regr -->
+  <table style="float: left">
+
+    <!-- top button for block=regr -->
+    <tr>
+      <td class="td1" id=td1_regr>
+        <button class="button-generic button-LHS btn5" id="btn5_regr" 
+        onmousedown="moveToDiv(hr_regr)" 
+        title="regressors" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_regr); }">
+        regr</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=regr -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_regr" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=regr -->
+<div class="form-popup" id="cform_regr" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_regr" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_regr.id, cform_regr.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_regr.id, cform_regr.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_regr.id, cform_regr.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_regr.id, cform_regr.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_regr.id, cform_regr.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_regr.id, cform_regr.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=radcor -->
+  <table style="float: left">
+
+    <!-- top button for block=radcor -->
+    <tr>
+      <td class="td1" id=td1_radcor>
+        <button class="button-generic button-LHS btn5" id="btn5_radcor" 
+        onmousedown="moveToDiv(hr_radcor)" 
+        title="@radial_correlate vols" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_radcor); }">
+        radcor</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=radcor -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_radcor" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=radcor -->
+<div class="form-popup" id="cform_radcor" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_radcor" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_radcor.id, cform_radcor.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_radcor.id, cform_radcor.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_radcor.id, cform_radcor.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_radcor.id, cform_radcor.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_radcor.id, cform_radcor.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_radcor.id, cform_radcor.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=warns -->
+  <table style="float: left">
+
+    <!-- top button for block=warns -->
+    <tr>
+      <td class="td1" id=td1_warns>
+        <button class="button-generic button-LHS btn5" id="btn5_warns" 
+        onmousedown="moveToDiv(hr_warns)" 
+        title="all warnings from processing" 
+        style="color: #EAEA99;"  
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_warns); }">
+        warns</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=warns -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_warns" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=warns -->
+<div class="form-popup" id="cform_warns" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_warns" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_warns.id, cform_warns.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_warns.id, cform_warns.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_warns.id, cform_warns.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_warns.id, cform_warns.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_warns.id, cform_warns.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_warns.id, cform_warns.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=qsumm -->
+  <table style="float: left">
+
+    <!-- top button for block=qsumm -->
+    <tr>
+      <td class="td1" id=td1_qsumm>
+        <button class="button-generic button-LHS btn5" id="btn5_qsumm" 
+        onmousedown="moveToDiv(hr_qsumm)" 
+        title="summary quantities from @ss_review_basic" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_qsumm); }">
+        qsumm</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=qsumm -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_qsumm" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=qsumm -->
+<div class="form-popup" id="cform_qsumm" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_qsumm" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_qsumm.id, cform_qsumm.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_qsumm.id, cform_qsumm.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_qsumm.id, cform_qsumm.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_qsumm.id, cform_qsumm.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_qsumm.id, cform_qsumm.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_qsumm.id, cform_qsumm.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+  <!-- start QC button table for block=FINAL -->
+  <table style="float: left">
+
+    <!-- top button for block=FINAL -->
+    <tr>
+      <td class="td1" id=td1_FINAL>
+        <button class="button-generic button-LHS btn5" id="btn5_FINAL" 
+        onmousedown="moveToDiv(hr_FINAL)" 
+        title="overall subject rating" 
+         
+        onkeypress="if ( event.keyCode == 13 ) { moveToDiv(hr_FINAL); }">
+        FINAL</button>
+      </td>
+    </tr>
+
+    <!-- bot button for block=FINAL -->
+    <tr>
+      <td>
+        <button class="button-generic button-LHS btn1" 
+                id="btn1_FINAL" data-txtcomm="" 
+                onmousedown="btn1Clicked(event, this)" 
+        onkeypress="if ( event.keyCode == 13 ) { btn1Clicked(event, this); }" 
+        </button>
+      </td>
+    </tr>
+
+</table>
+<!-- top of QC button comment form for block=FINAL -->
+<div class="form-popup" id="cform_FINAL" > 
+    <form class="form-container" onsubmit="return false;"> 
+    <textarea type="text" placeholder="Enter comment" 
+    rows="4" cols="40" id="comm_FINAL" 
+    onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+       event.preventDefault(); 
+       keepFromCommentForm(comm_FINAL.id, cform_FINAL.id);} 
+       else if (event.ctrlKey && event.keyCode == 27) { 
+           clearCommentFormAndRating(comm_FINAL.id, cform_FINAL.id); }
+       else if (event.keyCode == 27) { 
+           clearCommentForm(comm_FINAL.id, cform_FINAL.id); }">
+    </textarea>  
+    <button type="button" class="btn" 
+    onclick="keepFromCommentForm(comm_FINAL.id, cform_FINAL.id)">
+    keep</button> 
+    <button type="button" class="btn cancel" 
+    onclick="clearCommentForm(comm_FINAL.id, cform_FINAL.id)">
+    clear text</button> 
+    <button type="button" class="btn clearall" 
+    onclick="clearCommentFormAndRating(comm_FINAL.id, cform_FINAL.id)">
+    clear all</button> 
+    </form> 
+</div> <!-- bot of QC button comment form -->
+
+<!-- END of QC block buttons -->
+
+<!-- show subj ID in navbar -->
+<table style="float: left">
+  <tr>
+    <td style="width: fit-content;">
+    <p class="subj_text">sub-000</p>
+    </td>
+  </tr>
+</table>
+
+<!-- START of (right-floating) quick buttons -->
+<table style="float: right; margin-right: 2px">
+  <tr>
+    <td style="width: 140px; white-space:nowrap;">
+
+      <button class="button-generic button-RHS button-RHS-little btn2good" 
+      title="Speed rating with:  +.
+Click once (or Enter) to fill all *empty* QC buttons;
+Double-click (or ctrl+Enter) to fill *all* QC buttons.  
+" 
+      onmousedown="allYourBaseAreBelongToUs(1)" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+        if (event.ctrlKey) {
+          reallyAllYourBaseAreBelongToUs(1); 
+        } else { 
+          allYourBaseAreBelongToUs(1); 
+        }
+      } " 
+      ondblclick="reallyAllYourBaseAreBelongToUs(1)"> 
+      A+</button>
+
+      <button class="button-generic button-RHS button-RHS-little btn2bad" 
+      title="Speed rating with:  X.
+Click once (or Enter) to fill all *empty* QC buttons;
+Double-click (or ctrl+Enter) to fill *all* QC buttons.  
+" 
+      onmousedown="allYourBaseAreBelongToUs(2)" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+        if (event.ctrlKey) { 
+          reallyAllYourBaseAreBelongToUs(2);
+        } else {
+          allYourBaseAreBelongToUs(2);
+        }
+      } " 
+      ondblclick="reallyAllYourBaseAreBelongToUs(2)"> 
+      Ax</button>
+
+      <button class="button-generic button-RHS button-RHS-little btn2other" 
+      title="Speed rating with:  ?. 
+Click once (or Enter) to fill all *empty* QC buttons;
+Double-click (or ctrl+Enter) to fill *all* QC buttons.  
+" 
+      onmousedown="allYourBaseAreBelongToUs(0)" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+        if (event.ctrlKey) { 
+          reallyAllYourBaseAreBelongToUs(0);
+        } else { 
+          allYourBaseAreBelongToUs(0); 
+        }
+      } " 
+      ondblclick="reallyAllYourBaseAreBelongToUs(0)"> 
+      A?</button>
+
+    </td>
+  </tr>
+
+  <!-- bot row: clear and help buttons -->
+  <tr>
+    <td style="width: 140px; white-space:nowrap;" id=td3_TOBEDETERMINED>
+
+      <button class="button-generic button-RHS button-RHS-little btn2clear" 
+      title="Clear all (!) QC buttons.
+Double-click (or ctrl+Enter) to clear *all* QC buttons.
+" 
+      onkeydown="if (event.keyCode == 10 || event.keyCode == 13) { 
+        if (event.ctrlKey) { 
+          reallyAllYourBaseAreBelongToUs(-1); 
+        } 
+      } " 
+      ondblclick="reallyAllYourBaseAreBelongToUs(-1)"> 
+      clr</button>
+
+    <button class="button-generic button-RHS btn3help"
+            title="Click (or hit Enter) to open new help page.
+
+             -- Quick help on QC buttons --
+
+NAVIGATE
+Scroll, or click a label ('vorig', 've2a', etc.) to jump to a section.
+
+RATE + COMMENT
+Click the QC button below each label to rate it, toggling through:
+    +  :  good.
+    X  :  bad,
+    ?  :  other/revisit,
+Use ctrl+click (or cmd+click, on Macs) on a QC button to toggle a comment
+window open/closed. Comments also have save/clear buttons.
+
+SPEEDIFY
+There are 'filler buttons' for each rating: |A+|, |Ax|, |A?|.
+Click once to fill all *empty* buttons with that rating, or
+double click to fill *all* buttons (will overwrite) with that rating.
+" 
+            onclick="doShowHelp()">
+    HELP</button>
+
+    </td>
+  </tr>
+</table> <!-- end of right-side table of buttons -->
+</div> <!-- end of real/foreground navbar -->
+
+    
+<!-- start of title block div -->
+<div class="div_pad_class">
+  <hr class="hr_sec" id="hr_HOME"/>
+  <div id="HOME"  
+       style="padding-top: 80px; margin-top: -80px;">
+    <h1><center> afni_proc.py single subject report <center></h1>
+  </div>
+
+  <!-- top of subj/title info -->
+  <div style="text-align: center;">
+    <div style="display: inline-block; text-align: left;">
+      <pre><h2>subj: sub-000</h2></pre>
+      <pre><h3>task: task_name</h3></pre>
+    </div>
+  </div> <!-- bot of subj/title info -->
+</div> <!-- end of title block div -->
+
+</head> <!-- END of pre-QC-block part -->
+
+<body onload="RunAtStart()">
+    
+
+<!-- start of div for QC block: 'vorig' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_vorig" />
+<div  id="vorig"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('vorig')" 
+        title="jump in all tabs"><pre  class='padtop' >[vorig]<b> <u>Check vols in original space</u>        </b></pre></button></center>
+</div>
+
+<!-- top of text id="EPI" -->
+<div id="EPI" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('EPI')" 
+        title="jump in all tabs"><pre>EPI in original space (volreg base)
+dset: vr_base_min_outlier (EPI)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: EPI (media/qc_00_vorig_EPI.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_00_vorig_EPI.axi.jpg">
+    <img src="media/qc_00_vorig_EPI.axi.jpg" 
+         alt="media/qc_00_vorig_EPI.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_EPI>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_EPI_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_EPI>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_00_vorig_EPI.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: EPI (media/qc_00_vorig_EPI.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_00_vorig_EPI.sag.jpg">
+    <img src="media/qc_00_vorig_EPI.sag.jpg" 
+         alt="media/qc_00_vorig_EPI.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_EPI -->
+<div id="nvcan_EPI_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> dset: 0 <img  class='pbar'  style="display: inline;" src="media/qc_00_vorig_EPI.pbar.jpg" > 1509.0 (98%ile in vol)
+range: [-0.000, 3443.000]; obliquity: 0.000</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="anat" -->
+<div id="anat" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('anat')" 
+        title="jump in all tabs"><pre>Anatomical in original space
+dset: sub-000_ses-01_run-01_T1w_ROT (anat)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: anat (media/qc_01_vorig_anat.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_01_vorig_anat.axi.jpg">
+    <img src="media/qc_01_vorig_anat.axi.jpg" 
+         alt="media/qc_01_vorig_anat.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_anat>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_anat_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_anat>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_01_vorig_anat.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: anat (media/qc_01_vorig_anat.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_01_vorig_anat.sag.jpg">
+    <img src="media/qc_01_vorig_anat.sag.jpg" 
+         alt="media/qc_01_vorig_anat.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_anat -->
+<div id="nvcan_anat_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> dset: 0 <img  class='pbar'  style="display: inline;" src="media/qc_01_vorig_anat.pbar.jpg" > 1146.0 (98%ile in vol)
+range: [0.000, 1872.000]; obliquity: 0.000</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="olap" -->
+<div id="olap" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('olap')" 
+        title="jump in all tabs"><pre>Initial overlap, no obliquity: anat (ulay) and EPI (olay)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: olap (media/qc_02_vorig_olap.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_02_vorig_olap.sag.jpg">
+    <img src="media/qc_02_vorig_olap.sag.jpg" 
+         alt="media/qc_02_vorig_olap.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 've2a' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_ve2a" />
+<div  id="ve2a"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('ve2a')" 
+        title="jump in all tabs"><pre  class='padtop' >[ve2a]<b> <u>Check vol alignment (EPI to anat)</u>       </b></pre></button></center>
+</div>
+
+<!-- top of text id="epi2anat" -->
+<div id="epi2anat" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('epi2anat')" 
+        title="jump in all tabs"><pre>ulay: final_epi_vr_base_min_outlier (EPI)
+olay: anat_final.sub-000 (anat edges)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: epi2anat (media/qc_03_ve2a_epi2anat.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_03_ve2a_epi2anat.axi.jpg">
+    <img src="media/qc_03_ve2a_epi2anat.axi.jpg" 
+         alt="media/qc_03_ve2a_epi2anat.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_epi2anat>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_epi2anat_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_epi2anat>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_03_ve2a_epi2anat.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: epi2anat (media/qc_03_ve2a_epi2anat.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_03_ve2a_epi2anat.sag.jpg">
+    <img src="media/qc_03_ve2a_epi2anat.sag.jpg" 
+         alt="media/qc_03_ve2a_epi2anat.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_epi2anat -->
+<div id="nvcan_epi2anat_container" class="">
+</div> 
+
+
+<!-- top of text id="mask2final" -->
+<div id="mask2final" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('mask2final')" 
+        title="jump in all tabs"><pre>ulay: anat_final.sub-000 (final anatomical dset)
+olay: mask_epi_anat.sub-000 (final EPI mask coverage)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: mask2final (media/qc_04_ve2a_mask2final.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_04_ve2a_mask2final.axi.jpg">
+    <img src="media/qc_04_ve2a_mask2final.axi.jpg" 
+         alt="media/qc_04_ve2a_mask2final.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_mask2final>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_mask2final_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_mask2final>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_04_ve2a_mask2final.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: mask2final (media/qc_04_ve2a_mask2final.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_04_ve2a_mask2final.sag.jpg">
+    <img src="media/qc_04_ve2a_mask2final.sag.jpg" 
+         alt="media/qc_04_ve2a_mask2final.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_mask2final -->
+<div id="nvcan_mask2final_container" class="">
+</div> 
+
+
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 'vstat' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_vstat" />
+<div  id="vstat"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('vstat')" 
+        title="jump in all tabs"><pre  class='padtop' >[vstat]<b> <u>Check statistics vols (and effect estimates)</u>        </b></pre></button></center>
+</div>
+
+<!-- top of text id="Full_Fstat" -->
+<div id="Full_Fstat" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('Full_Fstat')" 
+        title="jump in all tabs"><pre>olay: [0] 'Full_Fstat' (in stats.sub-000)
+ thr: [0] 'Full_Fstat' (df = 1 313)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: Full_Fstat (media/qc_05_vstat_Full_Fstat.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_05_vstat_Full_Fstat.axi.jpg">
+    <img src="media/qc_05_vstat_Full_Fstat.axi.jpg" 
+         alt="media/qc_05_vstat_Full_Fstat.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_Full_Fstat>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_Full_Fstat_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_Full_Fstat>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_05_vstat_Full_Fstat.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+    <!-- top InstaCorr and Graph-View buttons (IC/GV) -->
+    <div class="container_icgv">
+      <td style="white-space:nowrap;" id=td6_IC_Full_Fstat>
+      <button class="button-generic button-RHS btn6b"
+              title="Run InstaCorr" 
+              onclick="doRunAV('run_instacorr_errts.tcsh ')">IC</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_GV_Full_Fstat>
+      <button class="button-generic button-RHS btn6b"
+              title="Run AFNI graph-view" 
+              onclick="doRunAV('run_graphview_errts.tcsh ')">GV</button>
+      </td>
+    </div> <!-- bot IC/GV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: Full_Fstat (media/qc_05_vstat_Full_Fstat.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_05_vstat_Full_Fstat.sag.jpg">
+    <img src="media/qc_05_vstat_Full_Fstat.sag.jpg" 
+         alt="media/qc_05_vstat_Full_Fstat.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_Full_Fstat -->
+<div id="nvcan_Full_Fstat_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: 0 <img  class='pbar'  style="display: inline;" src="media/qc_05_vstat_Full_Fstat.pbar.jpg" > 6.525701 (99%ile in mask)
+ thr : 2.720902 (90%ile in mask, alpha+boxed on)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="checkbrd_0_Coef" -->
+<div id="checkbrd_0_Coef" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('checkbrd_0_Coef')" 
+        title="jump in all tabs"><pre>olay: [1] 'checkbrd#0_Coef' (in stats.sub-000)
+ thr: [2] 'checkbrd#0_Tstat' (df = 313)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: checkbrd_0_Coef (media/qc_06_vstat_checkbrd_0_Coef.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_06_vstat_checkbrd_0_Coef.axi.jpg">
+    <img src="media/qc_06_vstat_checkbrd_0_Coef.axi.jpg" 
+         alt="media/qc_06_vstat_checkbrd_0_Coef.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_checkbrd_0_Coef>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_checkbrd_0_Coef_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_checkbrd_0_Coef>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_06_vstat_checkbrd_0_Coef.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+    <!-- top InstaCorr and Graph-View buttons (IC/GV) -->
+    <div class="container_icgv">
+      <td style="white-space:nowrap;" id=td6_IC_checkbrd_0_Coef>
+      <button class="button-generic button-RHS btn6b"
+              title="Run InstaCorr" 
+              onclick="doRunAV('run_instacorr_errts.tcsh ')">IC</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_GV_checkbrd_0_Coef>
+      <button class="button-generic button-RHS btn6b"
+              title="Run AFNI graph-view" 
+              onclick="doRunAV('run_graphview_errts.tcsh ')">GV</button>
+      </td>
+    </div> <!-- bot IC/GV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: checkbrd_0_Coef (media/qc_06_vstat_checkbrd_0_Coef.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_06_vstat_checkbrd_0_Coef.sag.jpg">
+    <img src="media/qc_06_vstat_checkbrd_0_Coef.sag.jpg" 
+         alt="media/qc_06_vstat_checkbrd_0_Coef.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_checkbrd_0_Coef -->
+<div id="nvcan_checkbrd_0_Coef_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: -1.510903 <img  class='pbar'  style="display: inline;" src="media/qc_06_vstat_checkbrd_0_Coef.pbar.jpg" > 1.510903 (99%ile in suprathresh mask voxels)
+ thr : 3.321881 (two-sided p=0.001, alpha+boxed on)</pre>
+</div> <!-- bot of text --></button>
+
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 'mot' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_mot" />
+<div  id="mot"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('mot')" 
+        title="jump in all tabs"><pre  class='padtop' >[mot]<b> <u>Check motion and outliers</u>      </b></pre></button></center>
+</div>
+
+<!-- top of text id="enormoutlr" -->
+<div id="enormoutlr" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('enormoutlr')" 
+        title="jump in all tabs"><pre>Motion Euclidean norm (enorm) and outlier fraction
+with limit and combined censoring</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image:  (media/qc_07_mot_enormoutlr.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_07_mot_enormoutlr.jpg">
+    <img src="media/qc_07_mot_enormoutlr.jpg" 
+         alt="media/qc_07_mot_enormoutlr.jpg"  class='bordered'  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre>censored vols (0%): </pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="VR6" -->
+<div id="VR6" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('VR6')" 
+        title="jump in all tabs"><pre>6 volume registration motion parameters (in dfile_rall.1D)
+with combined censoring</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image:  (media/qc_08_mot_VR6.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_08_mot_VR6.jpg">
+    <img src="media/qc_08_mot_VR6.jpg" 
+         alt="media/qc_08_mot_VR6.jpg"  class='bordered'  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre>censored vols (0%): </pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="grayplot" -->
+<div id="grayplot" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('grayplot')" 
+        title="jump in all tabs"><pre>Grayplot ('-pvorder') of residuals dset: errts.sub-000
+top: motion enorm (blue) and outlier frac (green), with censoring (red)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image:  (media/qc_09_mot_grayplot.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_09_mot_grayplot.jpg">
+    <img src="media/qc_09_mot_grayplot.jpg" 
+         alt="media/qc_09_mot_grayplot.jpg"  class='bordered'  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: -3.29 <img  class='pbar'  style="display: inline;" src="media/qc_09_mot_grayplot.pbar.jpg" > 3.29 (for normal distr, bounds of 0.001 prob tail)
+ rows: ordered by similarity to top two principal comps in mask (mask_epi_anat.sub-000)</pre>
+</div> <!-- bot of text --></button>
+
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 'regr' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_regr" />
+<div  id="regr"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('regr')" 
+        title="jump in all tabs"><pre  class='padtop' >[regr]<b> <u>Check regressors, DFs and residuals</u>       </b></pre></button></center>
+</div>
+
+<!-- top of text id="ideal" -->
+<div id="ideal" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('ideal')" 
+        title="jump in all tabs"><pre>Sum of regressors of interest (in sum_ideal.1D) and combined censoring</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image:  (media/qc_10_regr_ideal.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_10_regr_ideal.jpg">
+    <img src="media/qc_10_regr_ideal.jpg" 
+         alt="media/qc_10_regr_ideal.jpg"  class='bordered'  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre>censored vols (0%): </pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="stims" -->
+<div id="stims" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('stims')" 
+        title="jump in all tabs"><pre>Regressors of interest (per stim, in X.stim.xmat.1D) and combined censoring</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image:  (media/qc_11_regr_stims.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_11_regr_stims.jpg">
+    <img src="media/qc_11_regr_stims.jpg" 
+         alt="media/qc_11_regr_stims.jpg"  class='bordered'  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre>censored vols (0%): </pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="df" -->
+<div id="df" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('df')" 
+        title="jump in all tabs"><pre>Summary of degrees of freedom (DF) usage from processing</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='datbord'  ><left>
+initial DF                   : 334 : 100.0%
+
+DF used for regs of interest :   1 :   0.3%
+DF used for censoring        :   0 :   0.0%
+DF used for polort           :   8 :   2.4%
+DF used for motion           :  12 :   3.6%
+total DF used                :  21 :   6.3%
+
+final DF                     : 313 :  93.7%
+
+</left></pre>
+</div>
+<!-- top of text id="corr_errts" -->
+<div id="corr_errts" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('corr_errts')" 
+        title="jump in all tabs"><pre>olay: corr of WB-average errts with each voxel (corr_brain)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: corr_errts (media/qc_13_regr_corr_errts.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_13_regr_corr_errts.axi.jpg">
+    <img src="media/qc_13_regr_corr_errts.axi.jpg" 
+         alt="media/qc_13_regr_corr_errts.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_corr_errts>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_corr_errts_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_corr_errts>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_13_regr_corr_errts.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+    <!-- top InstaCorr and Graph-View buttons (IC/GV) -->
+    <div class="container_icgv">
+      <td style="white-space:nowrap;" id=td6_IC_corr_errts>
+      <button class="button-generic button-RHS btn6b"
+              title="Run InstaCorr" 
+              onclick="doRunAV('run_instacorr_errts.tcsh ')">IC</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_GV_corr_errts>
+      <button class="button-generic button-RHS btn6b"
+              title="Run AFNI graph-view" 
+              onclick="doRunAV('run_graphview_errts.tcsh ')">GV</button>
+      </td>
+    </div> <!-- bot IC/GV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: corr_errts (media/qc_13_regr_corr_errts.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_13_regr_corr_errts.sag.jpg">
+    <img src="media/qc_13_regr_corr_errts.sag.jpg" 
+         alt="media/qc_13_regr_corr_errts.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_corr_errts -->
+<div id="nvcan_corr_errts_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: -0.6 <img  class='pbar'  style="display: inline;" src="media/qc_13_regr_corr_errts.pbar.jpg" > 0.6 (Pearson r)
+ thr : 0.3 (alpha+boxed on)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="tsnr_vreg" -->
+<div id="tsnr_vreg" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('tsnr_vreg')" 
+        title="jump in all tabs"><pre>olay: TSNR.vreg.r01.sub-000 (TSNR, from r01 dset after volreg)
+mask: mask_epi_anat.sub-000 (for percentile range)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: tsnr_vreg (media/qc_14_regr_tsnr_vreg.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_14_regr_tsnr_vreg.axi.jpg">
+    <img src="media/qc_14_regr_tsnr_vreg.axi.jpg" 
+         alt="media/qc_14_regr_tsnr_vreg.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_tsnr_vreg>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_tsnr_vreg_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_tsnr_vreg>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_14_regr_tsnr_vreg.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+    <!-- top InstaCorr and Graph-View buttons (IC/GV) -->
+    <div class="container_icgv">
+      <td style="white-space:nowrap;" id=td6_IC_tsnr_vreg>
+      <button class="button-generic button-RHS btn6b"
+              title="Run InstaCorr" 
+              onclick="doRunAV('run_instacorr_pbrun.tcsh pb03 r01')">IC</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_GV_tsnr_vreg>
+      <button class="button-generic button-RHS btn6b"
+              title="Run AFNI graph-view" 
+              onclick="doRunAV('run_graphview_pbrun.tcsh pb03 r01')">GV</button>
+      </td>
+    </div> <!-- bot IC/GV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: tsnr_vreg (media/qc_14_regr_tsnr_vreg.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_14_regr_tsnr_vreg.sag.jpg">
+    <img src="media/qc_14_regr_tsnr_vreg.sag.jpg" 
+         alt="media/qc_14_regr_tsnr_vreg.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_tsnr_vreg -->
+<div id="nvcan_tsnr_vreg_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: 0 <img  class='pbar'  style="display: inline;" src="media/qc_14_regr_tsnr_vreg.pbar.jpg" > 65 (95%ile in mask)
+ info: 5-95%ile TSNR in mask: 5 - 65</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of text id="tsnr_fin" -->
+<div id="tsnr_fin" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('tsnr_fin')" 
+        title="jump in all tabs"><pre>olay: TSNR.sub-000 (final TSNR dset)
+mask: mask_epi_anat.sub-000 (for percentile range)</pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: tsnr_fin (media/qc_15_regr_tsnr_fin.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_15_regr_tsnr_fin.axi.jpg">
+    <img src="media/qc_15_regr_tsnr_fin.axi.jpg" 
+         alt="media/qc_15_regr_tsnr_fin.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_tsnr_fin>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_tsnr_fin_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_tsnr_fin>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_15_regr_tsnr_fin.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+    <!-- top InstaCorr and Graph-View buttons (IC/GV) -->
+    <div class="container_icgv">
+      <td style="white-space:nowrap;" id=td6_IC_tsnr_fin>
+      <button class="button-generic button-RHS btn6b"
+              title="Run InstaCorr" 
+              onclick="doRunAV('run_instacorr_errts.tcsh ')">IC</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_GV_tsnr_fin>
+      <button class="button-generic button-RHS btn6b"
+              title="Run AFNI graph-view" 
+              onclick="doRunAV('run_graphview_errts.tcsh ')">GV</button>
+      </td>
+    </div> <!-- bot IC/GV buttons -->
+</div> <!-- bottom of image -->
+
+
+<!-- top of image: tsnr_fin (media/qc_15_regr_tsnr_fin.sag.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_15_regr_tsnr_fin.sag.jpg">
+    <img src="media/qc_15_regr_tsnr_fin.sag.jpg" 
+         alt="media/qc_15_regr_tsnr_fin.sag.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_tsnr_fin -->
+<div id="nvcan_tsnr_fin_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: 0 <img  class='pbar'  style="display: inline;" src="media/qc_15_regr_tsnr_fin.pbar.jpg" > 190 (95%ile in mask)
+ info: 5-95%ile TSNR in mask: 45 - 190</pre>
+</div> <!-- bot of text --></button>
+
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 'radcor' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_radcor" />
+<div  id="radcor"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('radcor')" 
+        title="jump in all tabs"><pre  class='padtop' >[radcor]<b> <u>Check extent of local correlation</u>         </b></pre></button></center>
+</div>
+
+<!-- top of text id="rc_regress_d02" -->
+<div id="rc_regress_d02" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('rc_regress_d02')" 
+        title="jump in all tabs"><pre>@radial_correlate check for data dir: radcor.pb06.regress
+             olay: radcor.20.d02.errts.corr              </pre>
+</div> <!-- bot of text --></button>
+
+<!-- top of image: rc_regress_d02 (media/qc_16_radcor_rc_regress_d02.axi.jpg) -->
+<div style="text-align: center; position: relative;">
+    <a href="media/qc_16_radcor_rc_regress_d02.axi.jpg">
+    <img src="media/qc_16_radcor_rc_regress_d02.axi.jpg" 
+         alt="media/qc_16_radcor_rc_regress_d02.axi.jpg"  
+         style="display: inline-block; text-align: center;">
+    </a>
+    <!-- top AFNI-view and NiiVue buttons -->
+    <div class="container_avnv">
+      <td style="white-space:nowrap;" id=td6_NV_rc_regress_d02>
+      <button class="button-generic button-RHS btn6"
+              title="Run NiiVue" 
+            onclick="toggle_niivue(is_served,'nvcan_rc_regress_d02_container')">NV</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_AV_rc_regress_d02>
+      <button class="button-generic button-RHS btn6"
+              title="Run AFNI-view" 
+              onclick="doRunAV('run_qc_16_radcor_rc_regress_d02.tcsh')">AV</button>
+      </td>
+    </div> <!-- bot AV/NV buttons -->
+    <!-- top InstaCorr and Graph-View buttons (IC/GV) -->
+    <div class="container_icgv">
+      <td style="white-space:nowrap;" id=td6_IC_rc_regress_d02>
+      <button class="button-generic button-RHS btn6b"
+              title="Run InstaCorr" 
+              onclick="doRunAV('run_instacorr_errts.tcsh ')">IC</button>
+      </td>
+      <td style="white-space:nowrap;" id=td6_GV_rc_regress_d02>
+      <button class="button-generic button-RHS btn6b"
+              title="Run AFNI graph-view" 
+              onclick="doRunAV('run_graphview_errts.tcsh ')">GV</button>
+      </td>
+    </div> <!-- bot IC/GV buttons -->
+</div> <!-- bottom of image -->
+
+
+
+<!-- placeholder for NiiVue canvas: nvcan_rc_regress_d02 -->
+<div id="nvcan_rc_regress_d02_container" class="">
+</div> 
+
+
+<!-- top of text  -->
+<div  
+     style="padding-top: 0px; margin-top: -0px;"
+      class='container2' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('')" 
+        title="jump in all tabs"><pre> olay: -0.7 <img  class='pbar'  style="display: inline;" src="media/qc_16_radcor_rc_regress_d02.pbar.jpg" > 0.7 (ulay is anat_final.sub-000+orig.HEAD)
+ thr : 0.4 (alpha on)</pre>
+</div> <!-- bot of text --></button>
+
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 'warns' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_warns" />
+<div  id="warns"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('warns')" 
+        title="jump in all tabs"><pre  class='padtop' >[warns]<b> <u>Check all warnings from processing</u>        </b></pre></button></center>
+</div>
+
+<!-- top of text id="xmat" -->
+<div id="xmat" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('xmat')" 
+        title="jump in all tabs"><pre>Regression matrix correlation warnings</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_none">none</p>-- no warnings for correlation matrix (cut = 0.400) --
+</left></pre>
+</div>
+<!-- top of text id="cen_total" -->
+<div id="cen_total" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('cen_total')" 
+        title="jump in all tabs"><pre>General censor fraction warnings</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_none">none</p>Censored    0 of  334 total time points :   0.0%
+
+</left></pre>
+</div>
+<!-- top of text id="cen_stim" -->
+<div id="cen_stim" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('cen_stim')" 
+        title="jump in all tabs"><pre>Censor fraction warnings (per stim)</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_none">none</p>Max indiv stim censoring fraction :   0.0%
+--------------------------------------------
+Censored    0 of  240 TRs of 'checkbrd#0' stim :   0.0%
+
+</left></pre>
+</div>
+<!-- top of text id="decon" -->
+<div id="decon" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('decon')" 
+        title="jump in all tabs"><pre>3dDeconvolve warnings</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_undecided">undecided</p>*+ WARNING: Smallest FDR q [0 Full_Fstat] = 0.994857 ==> few true single voxel detections
+*+ WARNING: Smallest FDR q [2 checkbrd#0_Tstat] = 0.997364 ==> few true single voxel detections
+*+ WARNING: Smallest FDR q [3 checkbrd_Fstat] = 0.994857 ==> few true single voxel detections
+</left></pre>
+</div>
+<!-- top of text id="press" -->
+<div id="press" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('press')" 
+        title="jump in all tabs"><pre>Pre-steady state warnings</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_none">none</p></left></pre>
+</div>
+<!-- top of text id="sat_4095" -->
+<div id="sat_4095" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('sat_4095')" 
+        title="jump in all tabs"><pre>Saturation (4095 max) warnings</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_none">none</p></left></pre>
+</div>
+<!-- top of text id="vlines" -->
+<div id="vlines" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('vlines')" 
+        title="jump in all tabs"><pre>EPI variance lines warnings</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='warnbord'  ><left><p class="wcol_none">none</p>No lines found
+</left></pre>
+</div>
+</div> <!-- end of block div -->
+
+<!-- start of div for QC block: 'qsumm' -->
+<div class="div_pad_class">
+
+<hr class="hr_sec"  id="hr_qsumm" />
+<div  id="qsumm"  style="padding-top: 80px; margin-top: -80px;">
+  <center><button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('qsumm')" 
+        title="jump in all tabs"><pre  class='padtop' >[qsumm]<b> <u>Check summary quantities from @ss_review_basic</u>        </b></pre></button></center>
+</div>
+
+<!-- top of text id="ssrev" -->
+<div id="ssrev" 
+     style="padding-top: 80px; margin-top: -80px;"
+     class='container' >
+  <button style="all: unset" class="btn_title active" 
+        ondblclick="jumpAllOpenApqcToID('ssrev')" 
+        title="jump in all tabs"><pre>Basic summary quantities from processing</pre>
+</div> <!-- bot of text --></button>
+<div> 
+    <pre  class='datbord'  ><left>
+subject ID                : sub-000
+AFNI version              : AFNI_25.0.07
+AFNI package              : linux_rocky_8
+TR                        : 2.0
+TRs removed (per run)     : 3
+multiband level           : 1
+slice timing pattern      : simult
+num stim classes provided : 1
+final anatomy dset        : anat_final.sub-000+orig.HEAD
+final stats dset          : stats.sub-000+orig.HEAD
+orig voxel counts         : 70	70	37
+orig voxel resolution     : 2.000000	2.000000	2.500000
+orig volume center        : 1.822998	-14.525002	-1.828899
+final voxel resolution    : 2.000000	2.000000	2.000000
+
+motion limit              : 0.2
+num TRs above mot limit   : 0
+average motion (per TR)   : 0.00612541
+average censored motion   : 0.00612541
+max motion displacement   : 0.306209
+max censored displacement : 0.306209
+outlier limit             : 0.05
+average outlier frac (TR) : 0.000663442
+num TRs above out limit   : 0
+
+num runs found            : 2
+num TRs per run           : 167 167
+num TRs per run (applied) : 167 167
+num TRs per run (censored): 0 0
+fraction censored per run : 0 0
+TRs total (uncensored)    : 334
+TRs total                 : 334
+degrees of freedom used   : 21
+degrees of freedom left   : 313
+final DF fraction         : 0.937126
+
+TRs censored              : 0
+censor fraction           : 0.000000
+num regs of interest      : 1
+num TRs per stim (orig)   : 240
+num TRs censored per stim : 0
+fraction TRs censored     : 0.000
+ave mot per sresp (orig)  : 0.006049
+ave mot per sresp (cens)  : 0.006049
+
+TSNR average              : 99.2113
+global correlation (GCOR) : 0.000501278
+anat/EPI mask Dice coef   : 0.447267
+maximum F-stat (masked)   : 15.5032
+blur estimates (ACF)      : 0.993981 2.64721 2.18811
+blur estimates (FWHM)     : 0 0 0
+
+</left></pre>
+</div>
+</div> <!-- close of final QC block div -->
+
+</body>
+</html>

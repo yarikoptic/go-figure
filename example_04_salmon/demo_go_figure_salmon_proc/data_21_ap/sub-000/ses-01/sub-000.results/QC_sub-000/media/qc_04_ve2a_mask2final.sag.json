@@ -1,0 +1,8 @@
+{
+    "itemtype": "VOL",
+    "itemid": "mask2final",
+    "blockid": "ve2a",
+    "blockid_hov": "vol alignment (EPI-anat)",
+    "title": "Check vol alignment (EPI to anat)",
+    "nv_html": "qc_04_ve2a_mask2final.niivue.html"
+}

@@ -1,0 +1,24 @@
+itemtype     :: CBAR
+cbar         :: "Reds_and_Blues_Inv"
+pbar_fname   :: "qc_06_vstat_checkbrd_0_Coef.pbar.jpg"
+pbar_bot     :: "-1.510903"
+pbar_top     :: "1.510903"
+pbar_comm    :: "99%ile in suprathresh mask voxels"
+pbar_sign    :: "-"
+olay_alpha   :: "Yes"
+olay_boxed   :: "Yes"
+olay_opacity :: "9"
+see_olay     :: "+"
+subbb        :: 0 ,, 1 ,, 2
+coor_type    :: "SET_DICOM_XYZ"
+coors        :: 2.135498 ,, -13.301 ,, -1.328899
+is_left_left :: "YES"
+is_left_post :: "NO"
+vthr         :: "3.321881"
+vthr_comm    :: "two-sided p=0.001, alpha+boxed on"
+gen_comm     :: ""
+ulay_bot     :: "0.000000"
+ulay_top     :: "1403.254080"
+ulay_globran :: "VOLUME"
+ulay_comm    :: ""
+

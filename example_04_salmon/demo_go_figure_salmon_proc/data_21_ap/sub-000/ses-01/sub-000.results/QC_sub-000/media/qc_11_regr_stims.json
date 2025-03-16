@@ -1,0 +1,9 @@
+{
+    "itemtype": "1D",
+    "itemid": "stims",
+    "blockid": "regr",
+    "blockid_hov": "regressors",
+    "title": "Check regressors, DFs and residuals",
+    "text": "Regressors of interest (per stim, in X.stim.xmat.1D) and combined censoring",
+    "subtext": "censored vols (0%): "
+}

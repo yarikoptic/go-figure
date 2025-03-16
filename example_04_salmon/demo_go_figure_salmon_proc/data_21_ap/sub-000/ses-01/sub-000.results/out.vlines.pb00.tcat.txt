@@ -1,0 +1,162 @@
+++ have nslices : 37 37
+++ params: min_cvox 7, nerode 2,
+           perc 90, sdpower 2, thresh 0.97
+
+++ copying pb00.sub-000.r01.tcat+orig.HEAD[0..$] to ts.0.orig.r01.nii.gz
+++ 3dTcat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ elapsed time = 6.3 s
+++ copying pb00.sub-000.r02.tcat+orig.HEAD[0..$] to ts.0.orig.r02.nii.gz
+++ 3dTcat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ elapsed time = 6.2 s
+++ creating automask from first dset
+++ 3dAutomask: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Emperor Zhark
+++ Loading dataset ts.0.orig.r01.nii.gz
+++ Forming automask
+ + Fixed clip level = 448.820160
+ + Used gradual clip level = 356.543243 .. 617.920471
+ + Number voxels above clip level = 29881
+ + Clustering voxels ...
+ + Largest cluster has 29241 voxels
+ + Clustering voxels ...
+ + Largest cluster has 10961 voxels
+ + Filled   870 voxels in small holes; now have 11831 voxels
+ + Filled    26 voxels in large holes; now have 11857 voxels
+ + Clustering voxels ...
+ + Largest cluster has 11828 voxels
+ + Clustering non-brain voxels ...
+ + Clustering voxels ...
+ + Largest cluster has 169471 voxels
+ + Mask now has 11829 voxels
+++ 11829 voxels in the mask [out of 181300: 6.52%]
+++ first  13 x-planes are zero [from R]
+++ last   11 x-planes are zero [from L]
+++ first   1 y-planes are zero [from P]
+++ last   29 y-planes are zero [from A]
+++ first   1 z-planes are zero [from I]
+++ last    0 z-planes are zero [from S]
+++ Output dataset ./mask.nii.gz
+++ CPU time = 0.000000 sec
+
+-- will apply mask mask.nii.gz
+++ eroding mask.nii.gz by 2 voxels
+++ no -frac option: defaulting to -union
+++ processing 1 input dataset(s), NN=2...
+++ padding all datasets by 0 (for dilations)
+++ have 1 volumes of input to combine
+++ frac 0 over 1 volumes gives min count 0
+++ voxel limits: 0 clipped, 566 survived, 180734 were zero
+++ writing result mask.nii.gz...
+++ Output dataset ./mask.nii.gz
+
+++ requiring 7 voxels in mask columns
+++ 3dLocalstat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Emperor Zhark
+++ Number of voxels in mask = 566
+++ Neighborhood comprises 75 voxels
+++ Start sub-brick [0]
+++ Output dataset ./tmp.mask.col.count.nii.gz
+++ 3dcalc: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./mask.nii.gz
+
+-- detrend -polort 3, new eset = ts.1.det.r01.nii.gz
+++ 3dTproject: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Cox the Algebraic (Linear)
+++ Setting up regressors
+++ 1 Blocks * 4 polynomials -- 4 polort regressors
+++ 167 retained time points MINUS 4 regressors ==> 163 D.O.F. left
+++ no -mask option ==> processing all 181300 voxels in dataset
+[7m*+ WARNING:[0m 3dTproject input data :: 4639 vectors are constant
+
+++ 3dTstat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: KR Hammett & RW Cox
+++ Output dataset ./tmp.stdev.nii.gz
+++ 3dcalc: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./var.0.orig.r01.nii.gz
+++ 3dcalc: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./var.1.scale.r01.nii.gz
+++ 3dLocalstat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Emperor Zhark
+++ Number of voxels in mask = 23
+++ Neighborhood comprises 75 voxels
+++ Start sub-brick [0]
+++ Output dataset ./proj.r01.nii.gz
+++ Neighborhood definition (NN=3) accepted
+++ User input stat threshold: -1
+++ User input stat threshold: 0.97
+++ Data volume:      [0] 'MEAN'
+++ Threshold volume: [0] 'MEAN'
+++ How many sides to this stat? 0
+++ Looks like clustering is *not* being performed on a stat value; won't worry about sidedness, then.
+++ Opt code: 2sided,-1,0.97,NN3
+[7m*+ WARNING:[0m No mask being used? That *could* be OK, but thought I'd let you know...
+++ Threshold volume [0] does *not* appear to be a stat!
+[7m*+ WARNING:[0m No clusters found!
+#** NO CLUSTERS FOUND ***
+-- detrend -polort 3, new eset = ts.1.det.r02.nii.gz
+++ 3dTproject: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Cox the Algebraic (Linear)
+++ Setting up regressors
+++ 1 Blocks * 4 polynomials -- 4 polort regressors
+++ 167 retained time points MINUS 4 regressors ==> 163 D.O.F. left
+++ no -mask option ==> processing all 181300 voxels in dataset
+[7m*+ WARNING:[0m 3dTproject input data :: 4634 vectors are constant
+
+++ 3dTstat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: KR Hammett & RW Cox
+++ Output dataset ./tmp.stdev.nii.gz
+++ 3dcalc: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./var.0.orig.r02.nii.gz
+++ 3dcalc: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: A cast of thousands
+++ Output dataset ./var.1.scale.r02.nii.gz
+++ 3dLocalstat: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Emperor Zhark
+++ Number of voxels in mask = 23
+++ Neighborhood comprises 75 voxels
+++ Start sub-brick [0]
+++ Output dataset ./proj.r02.nii.gz
+++ Neighborhood definition (NN=3) accepted
+++ User input stat threshold: -1
+++ User input stat threshold: 0.97
+++ Data volume:      [0] 'MEAN'
+++ Threshold volume: [0] 'MEAN'
+++ How many sides to this stat? 0
+++ Looks like clustering is *not* being performed on a stat value; won't worry about sidedness, then.
+++ Opt code: 2sided,-1,0.97,NN3
+[7m*+ WARNING:[0m No mask being used? That *could* be OK, but thought I'd let you know...
+++ Threshold volume [0] does *not* appear to be a stat!
+[7m*+ WARNING:[0m No clusters found!
+#** NO CLUSTERS FOUND ***
+
+-- evaluating intersection...
+++ 3dMean: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Neighborhood definition (NN=3) accepted
+++ User input stat threshold: -1
+++ User input stat threshold: 0.97
+++ Data volume:      [0] 'MEAN'
+++ Threshold volume: [0] 'MEAN'
+++ How many sides to this stat? 0
+++ Looks like clustering is *not* being performed on a stat value; won't worry about sidedness, then.
+++ Opt code: 2sided,-1,0.97,NN3
+[7m*+ WARNING:[0m No mask being used? That *could* be OK, but thought I'd let you know...
+++ Threshold volume [0] does *not* appear to be a stat!
+[7m*+ WARNING:[0m No clusters found!
+#** NO CLUSTERS FOUND ***
+++ Check about making images
+++ have do_clean, removing time series...
+
+
+== found questionable regions across inputs: 0 0
+   found questionable intersected regions  : 0
+
+=============== bad_coords.inter.txt ===============
+
+=============== bad_coords.r01.txt ===============
+
+=============== bad_coords.r02.txt ===============
+

@@ -1,0 +1,24 @@
+itemtype     :: CBAR
+cbar         :: "gray_scale flip"
+pbar_fname   :: "qc_03_ve2a_epi2anat.pbar.jpg"
+pbar_bot     :: "0"
+pbar_top     :: "1146.000000"
+pbar_comm    :: ""
+pbar_sign    :: "+"
+olay_alpha   :: "No"
+olay_boxed   :: "No"
+olay_opacity :: "9"
+see_olay     :: "+"
+subbb        :: 0 ,, 0 ,, 0
+coor_type    :: "SET_DICOM_XYZ"
+coors        :: 2.822998 ,, -12.6135 ,, -0.828899
+is_left_left :: "YES"
+is_left_post :: "NO"
+vthr         :: "0"
+vthr_comm    :: ""
+gen_comm     :: ""
+ulay_bot     :: "-0.000001"
+ulay_top     :: "1590.542720"
+ulay_globran :: "VOLUME"
+ulay_comm    :: ""
+

@@ -1,0 +1,14 @@
+{
+    "itemtype": "VOL",
+    "itemid": "checkbrd_0_Coef",
+    "blockid": "vstat",
+    "blockid_hov": "statistics vols",
+    "title": "Check statistics vols (and effect estimates)",
+    "text": [
+        "olay: [1] 'checkbrd#0_Coef' (in stats.sub-000)",
+        " thr: [2] 'checkbrd#0_Tstat' (df = 313)"
+    ],
+    "av_file": "run_qc_06_vstat_checkbrd_0_Coef.tcsh",
+    "ic_file": "run_instacorr_errts.tcsh",
+    "gv_file": "run_graphview_errts.tcsh"
+}

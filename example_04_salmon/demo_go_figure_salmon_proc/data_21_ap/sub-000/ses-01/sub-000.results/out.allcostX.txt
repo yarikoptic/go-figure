@@ -1,0 +1,28 @@
+++ 3dAllineate: AFNI version=AFNI_25.0.07 (Feb 24 2025) [64-bit]
+++ Authored by: Zhark the Registrator
+++ Source dataset: ./anat_final.sub-000+orig.HEAD
+++ Base dataset:   ./final_epi_vr_base_min_outlier+orig.HEAD
+++ Loading datasets into memory
+++ Local correlation: blok type = 'TOHD(10.354)'
+ +        -cmass x y z shifts =    2.388   -9.260   -1.248
+ +  shift search range is +/- =   50.718   57.138   44.298
+[7m*+ WARNING:[0m No output dataset will be calculated
+++ OpenMP thread count = 8
+ + initial Parameters = 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 1.0000 1.0000 1.0000 0.0000 0.0000 0.0000
+++ allcost output: init #0
+   ls   = 0.153549
+   sp   = 0.117306
+   mi   = 4.30737
+   crM  = 0.0589293
+   nmi  = 0.84217
+   je   = 4.30737
+   hel  = -0.1722
+   crA  = 0.245115
+   crU  = 0.211171
+   lss  = 0.846451
+   lpc  = 0.97406
+   lpa  = 0.0259395
+   lpc+ = 1.07322
+   lpa+ = 0.125101
+++ 3dAllineate: total CPU time = 0.0 sec  Elapsed = 2.2
+++ ###########################################################

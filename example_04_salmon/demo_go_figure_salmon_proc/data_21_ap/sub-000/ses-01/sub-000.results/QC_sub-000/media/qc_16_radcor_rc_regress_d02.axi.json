@@ -1,0 +1,18 @@
+{
+    "itemtype": "VOL",
+    "itemid": "rc_regress_d02",
+    "blockid": "radcor",
+    "blockid_hov": "@radial_correlate vols",
+    "title": "Check extent of local correlation",
+    "text": [
+        "@radial_correlate check for data dir: radcor.pb06.regress",
+        "             olay: radcor.20.d02.errts.corr              "
+    ],
+    "nv_html": "qc_16_radcor_rc_regress_d02.niivue.html",
+    "av_file": "run_qc_16_radcor_rc_regress_d02.tcsh",
+    "ic_file": "run_instacorr_errts.tcsh",
+    "ic_args": "",
+    "gv_file": "run_graphview_errts.tcsh",
+    "gv_args": "",
+    "subtext": "SHOW_PBAR:qc_16_radcor_rc_regress_d02.pbar.json"
+}

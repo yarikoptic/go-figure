@@ -1,0 +1,12 @@
+{
+    "itemtype": "VOL",
+    "itemid": "anat",
+    "blockid": "vorig",
+    "blockid_hov": "vols in orig space",
+    "title": "Check vols in original space",
+    "text": [
+        "Anatomical in original space",
+        "dset: sub-000_ses-01_run-01_T1w_ROT (anat)"
+    ],
+    "av_file": "run_qc_01_vorig_anat.tcsh"
+}

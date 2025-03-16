@@ -1,0 +1,27 @@
+#
+#  Cluster report 
+#[ Dataset prefix      = stats.sub-000 ]
+#[ Threshold vol       = [2] 'checkbrd#0_Tstat' ]
+#[ Supplement dat vol  = [1] 'checkbrd#0_Coef' ]
+#[ Option summary      = bisided,-3.321881,3.321881,clust_nvox,3,NN2 ]
+#[ Threshold value(s)  = left-tail thr=-3.321881;  right-tail thr=3.321881 ]
+#[ Aux. stat. info.    = DEGREES-of-FREEDOM : 313  ]
+#[ Nvoxel threshold    = 3;  Volume threshold = 24.000 ]
+#[ Single voxel volume = 8.000 (microliters) ]
+#[ Neighbor type, NN   = 2 ]
+#[ Voxel datum type    = float ]
+#[ Voxel dimensions    = 2.000 mm X 2.000 mm X 2.000 mm ]
+#[ Coordinates Order   = RAI ]
+#[ Mask                = mask_anat_in_epi_final.nii.gz ]
+#[ Mean and SEM based on signed voxel intensities ]
+#
+#Volume  CM RL  CM AP  CM IS  minRL  maxRL  minAP  maxAP  minIS  maxIS    Mean     SEM    Max Int  MI RL  MI AP  MI IS
+#------  -----  -----  -----  -----  -----  -----  -----  -----  -----  -------  -------  -------  -----  -----  -----
+      6   -3.2  -26.2  -28.8   -5.2   -1.2  -28.6  -24.6  -28.8  -28.8   1.1089   0.1322   1.5109   -1.2  -24.6  -28.8 
+      3   43.7   -4.6  -19.5   42.8   44.8   -4.6   -4.6  -20.8  -18.8   0.7396   0.1125   0.9259   44.8   -4.6  -18.8 
+      3   26.2   36.7   10.5   24.8   26.8   35.4   37.4    9.2   11.2   0.2628   0.0036   0.2687   26.8   37.4   11.2 
+      3    2.1  -65.4   15.2    0.8    2.8  -66.6  -64.6   15.2   15.2   0.7168   0.0496   0.7931    2.8  -66.6   15.2 
+      3    4.1  -30.6  -29.4    2.8    4.8  -30.6  -30.6  -30.8  -28.8   -1.592   0.1052   -1.802    2.8  -30.6  -28.8 
+      3   -6.0  -31.2   23.2   -7.2   -5.2  -32.6  -30.6   23.2   23.2  -1.2098   0.1686  -1.5353   -7.2  -30.6   23.2 
+#------  -----  -----  -----  -----  -----  -----  -----  -----  -----  -------  -------  -------  -----  -----  -----
+#    21    4.9  -27.5  -12.4                                             0.1622   0.2343                             

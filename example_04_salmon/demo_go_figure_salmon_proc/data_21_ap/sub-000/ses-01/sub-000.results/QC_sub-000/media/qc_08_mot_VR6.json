@@ -1,0 +1,12 @@
+{
+    "itemtype": "1D",
+    "itemid": "VR6",
+    "blockid": "mot",
+    "blockid_hov": "motion and outliers",
+    "title": "Check motion and outliers",
+    "text": [
+        "6 volume registration motion parameters (in dfile_rall.1D)",
+        "with combined censoring"
+    ],
+    "subtext": "censored vols (0%): "
+}

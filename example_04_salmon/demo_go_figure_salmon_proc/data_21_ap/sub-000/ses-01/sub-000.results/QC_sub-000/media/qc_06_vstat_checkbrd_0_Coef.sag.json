@@ -1,0 +1,9 @@
+{
+    "itemtype": "VOL",
+    "itemid": "checkbrd_0_Coef",
+    "blockid": "vstat",
+    "blockid_hov": "statistics vols",
+    "title": "Check statistics vols (and effect estimates)",
+    "nv_html": "qc_06_vstat_checkbrd_0_Coef.niivue.html",
+    "subtext": "SHOW_PBAR:qc_06_vstat_checkbrd_0_Coef.pbar.json"
+}

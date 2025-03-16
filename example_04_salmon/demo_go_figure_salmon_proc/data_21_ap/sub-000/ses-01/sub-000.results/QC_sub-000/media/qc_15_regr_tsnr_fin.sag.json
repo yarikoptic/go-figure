@@ -1,0 +1,9 @@
+{
+    "itemtype": "VOL",
+    "itemid": "tsnr_fin",
+    "blockid": "regr",
+    "blockid_hov": "regressors",
+    "title": "Check regressors, DFs and residuals",
+    "nv_html": "qc_15_regr_tsnr_fin.niivue.html",
+    "subtext": "SHOW_PBAR:qc_15_regr_tsnr_fin.pbar.json"
+}

@@ -1,0 +1,9 @@
+{
+    "itemtype": "VOL",
+    "itemid": "Full_Fstat",
+    "blockid": "vstat",
+    "blockid_hov": "statistics vols",
+    "title": "Check statistics vols (and effect estimates)",
+    "nv_html": "qc_05_vstat_Full_Fstat.niivue.html",
+    "subtext": "SHOW_PBAR:qc_05_vstat_Full_Fstat.pbar.json"
+}
